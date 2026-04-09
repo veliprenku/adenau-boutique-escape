@@ -146,14 +146,6 @@ const translations = {
 
 type Translations = typeof translations;
 
-type NestedKeyOf<T> = {
-  [K in keyof T]: T[K] extends { de: string; en: string }
-    ? K
-    : T[K] extends object
-    ? `${K & string}.${NestedKeyOf<T[K]> & string}`
-    : never;
-}[keyof T];
-
 interface I18nContextType {
   lang: Lang;
   setLang: (l: Lang) => void;
