@@ -29,7 +29,7 @@ export default function RoomsPage() {
 
       {/* Rooms grid */}
       <section className="section-padding section-spacing">
-        <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
           {rooms.map((room, i) => (
             <ScrollReveal key={room.id} delay={i * 100}>
               <RoomCard room={room} />

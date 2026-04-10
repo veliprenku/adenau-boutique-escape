@@ -23,6 +23,8 @@ export default function RoomCard({ room }: { room: Room }) {
           src={room.image}
           alt={room.name[lang]}
           loading="lazy"
+          decoding="async"
+          sizes="(min-width: 1280px) 33vw, (min-width: 768px) 50vw, 100vw"
           className="w-full h-full object-cover"
         />
       </div>

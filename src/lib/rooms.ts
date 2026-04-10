@@ -1,99 +1,194 @@
-import roomComfort from "@/assets/room-comfort.jpg";
-import roomNuerburgring from "@/assets/room-nuerburgring.jpg";
-import roomFamily from "@/assets/room-family.jpg";
-import roomStandard from "@/assets/room-standard.jpg";
+import { roomAssetSets, roomCoverImages, type GalleryAsset } from "@/lib/media";
+
+type LocalizedText = { de: string; en: string };
 
 export interface Room {
   id: string;
   slug: string;
-  name: { de: string; en: string };
+  name: LocalizedText;
   price: number;
-  description: { de: string; en: string };
-  longDescription: { de: string; en: string };
+  description: LocalizedText;
+  longDescription: LocalizedText;
   image: string;
+  gallery: GalleryAsset[];
   amenities: string[];
   features: { de: string[]; en: string[] };
 }
 
 export const rooms: Room[] = [
   {
-    id: "1",
-    slug: "double-room-comfort",
-    name: { de: "Doppelzimmer Komfort", en: "Double Room Comfort" },
+    id: "101",
+    slug: "zimmer-101",
+    name: { de: "Zimmer 101", en: "Room 101" },
     price: 79,
     description: {
-      de: "Ein geräumiges Doppelzimmer mit modernem Komfort und natürlichem Licht.",
-      en: "A spacious double room with modern comfort and natural light.",
+      de: "Helles Doppelzimmer mit modernem Bad und Platz zum Arbeiten.",
+      en: "Bright double room with a modern bathroom and space to work.",
     },
     longDescription: {
-      de: "Unser Doppelzimmer Komfort bietet Ihnen viel Platz zum Entspannen. Das helle, freundliche Zimmer ist mit einem bequemen Doppelbett, einem modernen Badezimmer und einem Arbeitsbereich ausgestattet. Genießen Sie den Blick ins Grüne und starten Sie erholt in den Tag.",
-      en: "Our Double Room Comfort offers plenty of space to relax. The bright, friendly room features a comfortable double bed, a modern bathroom, and a work area. Enjoy the view of the greenery and start your day refreshed.",
+      de: "Zimmer 101 bietet ein ruhiges, gepflegtes Ambiente mit viel Tageslicht, warmem Holzboden und einem klaren modernen Look. Ideal fuer Paare oder Ring-Besucher, die ein entspanntes Doppelzimmer mit eigenem Bad suchen.",
+      en: "Room 101 offers a calm, well-kept setting with plenty of daylight, warm wood flooring, and a clean modern look. It is ideal for couples or Ring visitors who want a relaxed double room with a private bathroom.",
     },
-    image: roomComfort,
-    amenities: ["wifi", "parking", "breakfast", "clean"],
-    features: {
-      de: ["Doppelbett (180x200cm)", "Eigenes Badezimmer mit Dusche", "Kostenfreies WLAN", "Flachbild-TV", "Schreibtisch", "Handtücher & Bettwäsche"],
-      en: ["Double bed (180x200cm)", "Private bathroom with shower", "Free WiFi", "Flat-screen TV", "Writing desk", "Towels & bed linen"],
-    },
-  },
-  {
-    id: "2",
-    slug: "nuerburgring-weekend-room",
-    name: { de: "Nürburgring Wochenendzimmer", en: "Nürburgring Weekend Room" },
-    price: 89,
-    description: {
-      de: "Ideal für Motorsport-Begeisterte — komfortabel und stilvoll mit subtilen Racing-Akzenten.",
-      en: "Ideal for motorsport enthusiasts — comfortable and stylish with subtle racing accents.",
-    },
-    longDescription: {
-      de: "Das Nürburgring Wochenendzimmer ist perfekt für alle, die das Rennstrecken-Feeling auch nach dem Tag auf dem Ring noch spüren möchten. Stilvolle Details, ein großzügiges Bett und alles, was Sie für ein erholsames Wochenende brauchen.",
-      en: "The Nürburgring Weekend Room is perfect for those who want to feel the track atmosphere even after a day at the Ring. Stylish details, a generous bed, and everything you need for a restful weekend.",
-    },
-    image: roomNuerburgring,
+    image: roomCoverImages["101"],
+    gallery: roomAssetSets["101"],
     amenities: ["wifi", "parking", "clean"],
     features: {
-      de: ["Queensize-Bett", "Eigenes Badezimmer", "Kostenfreies WLAN", "Flachbild-TV", "Garderobe", "Motorsport-Dekor"],
-      en: ["Queen-size bed", "Private bathroom", "Free WiFi", "Flat-screen TV", "Wardrobe", "Motorsport decor"],
+      de: [
+        "Doppelbett",
+        "Eigenes Badezimmer",
+        "Kostenfreies WLAN",
+        "Flachbild-TV",
+        "Schreibtisch",
+        "Handtuecher und Bettwaesche",
+      ],
+      en: [
+        "Double bed",
+        "Private bathroom",
+        "Free WiFi",
+        "Flat-screen TV",
+        "Desk",
+        "Towels and bed linen",
+      ],
     },
   },
   {
-    id: "3",
-    slug: "family-guest-room",
-    name: { de: "Familien-Gästezimmer", en: "Family Guest Room" },
+    id: "102",
+    slug: "zimmer-102",
+    name: { de: "Zimmer 102", en: "Room 102" },
+    price: 79,
+    description: {
+      de: "Gemutliches Doppelzimmer mit kompakter Aufteilung und modernem Komfort.",
+      en: "Cozy double room with a compact layout and modern comfort.",
+    },
+    longDescription: {
+      de: "Zimmer 102 ist ein angenehmes Doppelzimmer mit klarer Ausstattung, warmen Farben und einem modernen Bad. Eine gute Wahl fuer kurze Wochenenden am Nuerburgring oder entspannte Tage in Adenau.",
+      en: "Room 102 is a comfortable double room with clean lines, warm tones, and a modern bathroom. It is a strong choice for short Nuerburgring weekends or relaxed days in Adenau.",
+    },
+    image: roomCoverImages["102"],
+    gallery: roomAssetSets["102"],
+    amenities: ["wifi", "parking", "clean"],
+    features: {
+      de: [
+        "Doppelbett",
+        "Modernes Badezimmer",
+        "Kostenfreies WLAN",
+        "Flachbild-TV",
+        "Sitz- und Arbeitsbereich",
+        "Handtuecher und Bettwaesche",
+      ],
+      en: [
+        "Double bed",
+        "Modern bathroom",
+        "Free WiFi",
+        "Flat-screen TV",
+        "Seating and work area",
+        "Towels and bed linen",
+      ],
+    },
+  },
+  {
+    id: "103",
+    slug: "zimmer-103",
+    name: { de: "Familienzimmer 103", en: "Family Room 103" },
     price: 109,
     description: {
-      de: "Großzügig geschnitten für Familien — mit Platz für bis zu vier Gäste.",
-      en: "Generously sized for families — with space for up to four guests.",
+      de: "Grosszuegiges Zimmer mit mehreren Schlafplaetzen fuer Familien oder kleine Gruppen.",
+      en: "Generous room with multiple sleeping spaces for families or small groups.",
     },
     longDescription: {
-      de: "Unser Familien-Gästezimmer bietet ausreichend Platz für die ganze Familie. Mit zwei bequemen Betten, einem hellen Wohnbereich und einem geräumigen Bad ist dieses Zimmer Ihr Zuhause in der Eifel.",
-      en: "Our Family Guest Room offers plenty of space for the whole family. With two comfortable beds, a bright living area, and a spacious bathroom, this room is your home in the Eifel.",
+      de: "Familienzimmer 103 bietet mehr Flexibilitaet fuer Gaeste, die zusammen reisen. Der helle Raum verbindet mehrere Schlafmoeglichkeiten mit derselben modernen, gepflegten Ausstattung wie die anderen Zimmer im Haus.",
+      en: "Family Room 103 gives extra flexibility to guests traveling together. The bright space combines multiple sleeping options with the same modern, well-kept finish found throughout the house.",
     },
-    image: roomFamily,
+    image: roomCoverImages["103"],
+    gallery: roomAssetSets["103"],
     amenities: ["wifi", "parking", "breakfast", "clean"],
     features: {
-      de: ["Zwei Einzelbetten / Doppelbett", "Zusatzbett möglich", "Eigenes großes Bad", "Kostenfreies WLAN", "Flachbild-TV", "Familiäre Atmosphäre"],
-      en: ["Two single beds / double bed", "Extra bed available", "Private large bathroom", "Free WiFi", "Flat-screen TV", "Family-friendly atmosphere"],
+      de: [
+        "Mehrere Schlafplaetze",
+        "Eigenes Badezimmer",
+        "Kostenfreies WLAN",
+        "Flachbild-TV",
+        "Tisch und Sitzbereich",
+        "Handtuecher und Bettwaesche",
+      ],
+      en: [
+        "Multiple sleeping spaces",
+        "Private bathroom",
+        "Free WiFi",
+        "Flat-screen TV",
+        "Table and seating area",
+        "Towels and bed linen",
+      ],
     },
   },
   {
-    id: "4",
-    slug: "standard-quiet-room",
-    name: { de: "Standard Ruhezimmer", en: "Standard Quiet Room" },
-    price: 69,
+    id: "201",
+    slug: "zimmer-201",
+    name: { de: "Komfortzimmer 201", en: "Comfort Room 201" },
+    price: 89,
     description: {
-      de: "Ein gemütliches Einzelzimmer — schlicht, sauber und perfekt für eine ruhige Nacht.",
-      en: "A cozy single room — simple, clean, and perfect for a quiet night.",
+      de: "Ruhiges Komfortzimmer unter dem Dach mit viel Licht und wohnlicher Atmosphaere.",
+      en: "Quiet comfort room under the roof with plenty of light and a homely feel.",
     },
     longDescription: {
-      de: "Das Standard Ruhezimmer ist ideal für Alleinreisende oder Geschäftsreisende, die eine saubere, ruhige Unterkunft suchen. Funktional eingerichtet, mit allem Notwendigen für einen erholsamen Aufenthalt.",
-      en: "The Standard Quiet Room is ideal for solo travelers or business guests looking for a clean, quiet accommodation. Functionally furnished with everything needed for a restful stay.",
+      de: "Zimmer 201 verbindet den ruhigen Charakter des oberen Stockwerks mit einem hellen Schlafbereich und einem grossen modernen Bad. Es passt gut zu Gaesten, die etwas mehr Rueckzug und eine entspannte Zimmeratmosphaere suchen.",
+      en: "Room 201 combines the calm of the upper floor with a bright sleeping area and a spacious modern bathroom. It suits guests who want a little more privacy and a relaxed room atmosphere.",
     },
-    image: roomStandard,
+    image: roomCoverImages["201"],
+    gallery: roomAssetSets["201"],
     amenities: ["wifi", "parking", "clean"],
     features: {
-      de: ["Einzelbett (120x200cm)", "Eigenes Badezimmer", "Kostenfreies WLAN", "Handtücher & Bettwäsche", "Nachttischlampe", "Kleiderschrank"],
-      en: ["Single bed (120x200cm)", "Private bathroom", "Free WiFi", "Towels & bed linen", "Bedside lamp", "Wardrobe"],
+      de: [
+        "Doppelbett",
+        "Grosses Badezimmer",
+        "Kostenfreies WLAN",
+        "Flachbild-TV",
+        "Schreibtisch",
+        "Handtuecher und Bettwaesche",
+      ],
+      en: [
+        "Double bed",
+        "Large bathroom",
+        "Free WiFi",
+        "Flat-screen TV",
+        "Desk",
+        "Towels and bed linen",
+      ],
+    },
+  },
+  {
+    id: "202",
+    slug: "zimmer-202",
+    name: { de: "Komfortzimmer 202", en: "Comfort Room 202" },
+    price: 89,
+    description: {
+      de: "Grosses, sonniges Doppelzimmer mit offenem Raumgefuehl und modernem Setup.",
+      en: "Large, sunlit double room with an open feel and a modern setup.",
+    },
+    longDescription: {
+      de: "Zimmer 202 wirkt besonders offen und freundlich. Viel Tageslicht, klare Materialien und ein grosszuegiger Grundriss machen es zu einer starken Wahl fuer alle, die etwas mehr Raum und Leichtigkeit im Aufenthalt suchen.",
+      en: "Room 202 feels especially open and welcoming. Plenty of daylight, clean materials, and a generous layout make it a strong choice for guests who want a little more space and ease during their stay.",
+    },
+    image: roomCoverImages["202"],
+    gallery: roomAssetSets["202"],
+    amenities: ["wifi", "parking", "breakfast", "clean"],
+    features: {
+      de: [
+        "Doppelbett",
+        "Eigenes Badezimmer",
+        "Kostenfreies WLAN",
+        "Flachbild-TV",
+        "Sitz- und Arbeitsbereich",
+        "Handtuecher und Bettwaesche",
+      ],
+      en: [
+        "Double bed",
+        "Private bathroom",
+        "Free WiFi",
+        "Flat-screen TV",
+        "Seating and work area",
+        "Towels and bed linen",
+      ],
     },
   },
 ];

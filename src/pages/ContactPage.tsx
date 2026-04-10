@@ -3,11 +3,15 @@ import { useState } from "react";
 import ScrollReveal from "@/components/ScrollReveal";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import ConsentMapEmbed from "@/components/ConsentMapEmbed";
 import { MapPin, Phone, Mail, Send } from "lucide-react";
 
 export default function ContactPage() {
   const { lang, t } = useI18n();
   const [formData, setFormData] = useState({ name: "", email: "", message: "" });
+  const mapEmbedUrl =
+    "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2532.8!2d6.9345!3d50.3825!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47bfb0b0b0b0b0b0%3A0x0!2sAdenau!5e0!3m2!1sde!2sde!4v1";
+  const mapDirectionsUrl = "https://www.google.com/maps/search/?api=1&query=Buttermarkt+3%2C+53518+Adenau";
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -73,17 +77,12 @@ export default function ContactPage() {
               </div>
 
               {/* Map */}
-              <div className="rounded-xl overflow-hidden border border-border/50">
-                <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2532.8!2d6.9345!3d50.3825!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47bfb0b0b0b0b0b0%3A0x0!2sAdenau!5e0!3m2!1sde!2sde!4v1"
-                  width="100%"
-                  height="280"
-                  style={{ border: 0 }}
-                  allowFullScreen
-                  loading="lazy"
-                  title="Map"
-                />
-              </div>
+              <ConsentMapEmbed
+                iframeTitle={lang === "de" ? "Karte zum Ferienzimmer Am Buttermarkt" : "Map to Ferienzimmer Am Buttermarkt"}
+                src={mapEmbedUrl}
+                mapsLink={mapDirectionsUrl}
+                heightClassName="h-[280px]"
+              />
             </div>
           </ScrollReveal>
 

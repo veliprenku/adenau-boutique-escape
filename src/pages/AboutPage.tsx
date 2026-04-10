@@ -2,20 +2,24 @@ import { useI18n } from "@/lib/i18n";
 import ScrollReveal from "@/components/ScrollReveal";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import heroMain from "@/assets/hero-main.jpg";
+import ConsentMapEmbed from "@/components/ConsentMapEmbed";
 import adenauLandscape from "@/assets/adenau-landscape.jpg";
 import adenauVillage from "@/assets/adenau-village.jpg";
 import nuerburgring from "@/assets/nuerburgring.jpg";
-import breakfast from "@/assets/breakfast.jpg";
+import { propertyImages } from "@/lib/media";
+import { rooms } from "@/lib/rooms";
 
 export default function AboutPage() {
   const { lang, t } = useI18n();
+  const mapEmbedUrl =
+    "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2532.8!2d6.9345!3d50.3825!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47bfb0b0b0b0b0b0%3A0x0!2sAdenau!5e0!3m2!1sde!2sde!4v1";
+  const mapDirectionsUrl = "https://www.google.com/maps/search/?api=1&query=Buttermarkt+3%2C+53518+Adenau";
 
   const sections = [
     {
       title: t("about", "storyTitle"),
       text: t("about", "storyText"),
-      image: heroMain,
+      image: rooms[0].image,
     },
     {
       title: t("about", "adenauTitle"),
@@ -30,7 +34,7 @@ export default function AboutPage() {
     {
       title: t("about", "nearbyTitle"),
       text: t("about", "nearbyText"),
-      image: breakfast,
+      image: adenauLandscape,
     },
   ];
 
@@ -41,9 +45,12 @@ export default function AboutPage() {
       {/* Hero */}
       <section className="relative h-[50vh] min-h-[400px]">
         <img
-          src={adenauLandscape}
-          alt="Adenau Eifel"
+          src={propertyImages.exteriorHero}
+          alt={lang === "de" ? "Ferienzimmer Am Buttermarkt Aussenansicht" : "Ferienzimmer Am Buttermarkt exterior"}
           className="absolute inset-0 w-full h-full object-cover"
+          fetchPriority="high"
+          decoding="async"
+          sizes="100vw"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-foreground/60 to-foreground/20" />
         <div className="relative z-10 h-full flex flex-col items-center justify-center text-center section-padding">
@@ -70,7 +77,14 @@ export default function AboutPage() {
             </ScrollReveal>
             <ScrollReveal delay={200}>
               <div className="img-zoom rounded-xl overflow-hidden lg:[direction:ltr]">
-                <img src={sec.image} alt={sec.title} loading="lazy" className="w-full h-72 md:h-96 object-cover" />
+                <img
+                  src={sec.image}
+                  alt={sec.title}
+                  loading="lazy"
+                  decoding="async"
+                  sizes="(min-width: 1024px) 50vw, 100vw"
+                  className="w-full h-72 md:h-96 object-cover"
+                />
               </div>
             </ScrollReveal>
           </div>
@@ -84,18 +98,12 @@ export default function AboutPage() {
             <h2 className="font-serif text-2xl font-semibold mb-6">
               {lang === "de" ? "So finden Sie uns" : "How to find us"}
             </h2>
-            <div className="rounded-xl overflow-hidden border border-border/50">
-              <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2532.8!2d6.9345!3d50.3825!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47bfb0b0b0b0b0b0%3A0x0!2sAdenau!5e0!3m2!1sde!2sde!4v1"
-                width="100%"
-                height="400"
-                style={{ border: 0 }}
-                allowFullScreen
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-                title="Map"
-              />
-            </div>
+            <ConsentMapEmbed
+              iframeTitle={lang === "de" ? "Karte zum Ferienzimmer Am Buttermarkt" : "Map to Ferienzimmer Am Buttermarkt"}
+              src={mapEmbedUrl}
+              mapsLink={mapDirectionsUrl}
+              heightClassName="h-[400px]"
+            />
           </div>
         </ScrollReveal>
       </section>

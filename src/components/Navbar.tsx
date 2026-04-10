@@ -1,7 +1,9 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { useI18n } from "@/lib/i18n";
 import { Menu, X } from "lucide-react";
+
+import BrandLogo from "@/components/BrandLogo";
+import { useI18n } from "@/lib/i18n";
 
 export default function Navbar() {
   const { lang, setLang, t } = useI18n();
@@ -25,6 +27,7 @@ export default function Navbar() {
     : "bg-transparent";
 
   const textColor = scrolled || !isHome ? "text-foreground" : "text-primary-foreground";
+  const brandTone = scrolled || !isHome ? "dark" : "light";
 
   const links = [
     { to: "/", label: t("nav", "home") },
@@ -35,13 +38,21 @@ export default function Navbar() {
 
   return (
     <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${navBg}`}>
-      <div className="section-padding flex items-center justify-between h-20">
-        <Link to="/" className={`font-serif text-lg md:text-xl font-semibold tracking-tight ${textColor} transition-colors`}>
-          Ferienzimmer Am Buttermarkt
+      <div className="section-padding flex items-center justify-between h-20 gap-5">
+        <Link
+          to="/"
+          aria-label="Ferienzimmer Am Buttermarkt"
+          className="shrink-0"
+        >
+          <BrandLogo
+            tone={brandTone}
+            compact
+            showSubtitle={false}
+            className="max-w-[16rem] md:max-w-none"
+          />
         </Link>
 
-        {/* Desktop */}
-        <div className="hidden md:flex items-center gap-8">
+        <div className="hidden md:flex items-center gap-6 xl:gap-8">
           {links.map((link) => (
             <Link
               key={link.to}
@@ -53,21 +64,25 @@ export default function Navbar() {
               {link.label}
             </Link>
           ))}
+
           <div className={`flex items-center gap-1 text-xs font-medium ${textColor}`}>
             <button
+              type="button"
               onClick={() => setLang("de")}
               className={`px-2 py-1 rounded transition-all ${lang === "de" ? "bg-foreground/10" : "opacity-60 hover:opacity-100"}`}
             >
               DE
             </button>
-            <span className="opacity-40">|</span>
+            <span className="opacity-40">-</span>
             <button
+              type="button"
               onClick={() => setLang("en")}
               className={`px-2 py-1 rounded transition-all ${lang === "en" ? "bg-foreground/10" : "opacity-60 hover:opacity-100"}`}
             >
               EN
             </button>
           </div>
+
           <a
             href="https://www.booking.com"
             target="_blank"
@@ -78,8 +93,8 @@ export default function Navbar() {
           </a>
         </div>
 
-        {/* Mobile toggle */}
         <button
+          type="button"
           onClick={() => setMenuOpen(!menuOpen)}
           className={`md:hidden ${textColor} transition-colors`}
           aria-label="Menu"
@@ -88,7 +103,6 @@ export default function Navbar() {
         </button>
       </div>
 
-      {/* Mobile menu */}
       {menuOpen && (
         <div className="md:hidden bg-background/95 nav-glass border-t border-border animate-slide-down">
           <div className="section-padding py-6 flex flex-col gap-4">
@@ -101,20 +115,24 @@ export default function Navbar() {
                 {link.label}
               </Link>
             ))}
+
             <div className="flex items-center gap-3 pt-2">
               <button
+                type="button"
                 onClick={() => setLang("de")}
                 className={`px-3 py-1.5 rounded text-sm font-medium transition-all ${lang === "de" ? "bg-secondary text-secondary-foreground" : "text-muted-foreground"}`}
               >
                 Deutsch
               </button>
               <button
+                type="button"
                 onClick={() => setLang("en")}
                 className={`px-3 py-1.5 rounded text-sm font-medium transition-all ${lang === "en" ? "bg-secondary text-secondary-foreground" : "text-muted-foreground"}`}
               >
                 English
               </button>
             </div>
+
             <a
               href="https://www.booking.com"
               target="_blank"

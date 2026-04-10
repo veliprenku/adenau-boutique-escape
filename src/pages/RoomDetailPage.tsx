@@ -3,6 +3,7 @@ import { useI18n } from "@/lib/i18n";
 import { rooms } from "@/lib/rooms";
 import ScrollReveal from "@/components/ScrollReveal";
 import RoomCard from "@/components/RoomCard";
+import RoomGallery from "@/components/RoomGallery";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { ArrowLeft, Check } from "lucide-react";
@@ -33,6 +34,9 @@ export default function RoomDetailPage() {
           src={room.image}
           alt={room.name[lang]}
           className="absolute inset-0 w-full h-full object-cover"
+          fetchPriority="high"
+          decoding="async"
+          sizes="100vw"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-foreground/60 to-transparent" />
         <div className="absolute bottom-8 left-0 right-0 section-padding">
@@ -61,6 +65,14 @@ export default function RoomDetailPage() {
             </ScrollReveal>
 
             <ScrollReveal delay={100}>
+              <RoomGallery
+                images={room.gallery}
+                roomName={room.name[lang]}
+                lang={lang}
+              />
+            </ScrollReveal>
+
+            <ScrollReveal delay={150}>
               <h2 className="font-serif text-2xl font-semibold mb-6">
                 {t("roomDetail", "features")}
               </h2>

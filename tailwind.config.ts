@@ -14,8 +14,8 @@ export default {
     },
     extend: {
       fontFamily: {
-        serif: ["'Playfair Display'", "Georgia", "serif"],
-        sans: ["'Inter'", "system-ui", "sans-serif"],
+        serif: ["'Iowan Old Style'", "'Palatino Linotype'", "'Book Antiqua'", "Baskerville", "Georgia", "serif"],
+        sans: ["Aptos", "'Segoe UI'", "'Helvetica Neue'", "Arial", "sans-serif"],
       },
       colors: {
         border: "hsl(var(--border))",

@@ -6,12 +6,9 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Link } from "react-router-dom";
 import { MapPin, Sun, CalendarCheck, Wifi, Car, Coffee, Sparkles, TreePine, ChevronDown, Star, Quote } from "lucide-react";
-import heroMain from "@/assets/hero-main.jpg";
-import breakfast from "@/assets/breakfast.jpg";
 import nuerburgring from "@/assets/nuerburgring.jpg";
-import adenauVillage from "@/assets/adenau-village.jpg";
-import adenauLandscape from "@/assets/adenau-landscape.jpg";
 import { useState } from "react";
+import { propertyImages } from "@/lib/media";
 import {
   Accordion,
   AccordionContent,
@@ -66,6 +63,34 @@ const faqItems = {
 export default function HomePage() {
   const { lang, t } = useI18n();
   const [testimonialIdx, setTestimonialIdx] = useState(0);
+  const introImages = [
+    {
+      src: rooms[0].image,
+      alt: rooms[0].name[lang],
+    },
+    {
+      src: propertyImages.exteriorPortrait,
+      alt: lang === "de" ? "Aussenansicht des Gaestehauses" : "Guesthouse exterior",
+    },
+  ];
+  const galleryPreviewItems = [
+    {
+      src: propertyImages.entranceDetail,
+      alt: lang === "de" ? "Eingangsbereich des Gaestehauses" : "Guesthouse entrance detail",
+    },
+    {
+      src: rooms[2].image,
+      alt: rooms[2].name[lang],
+    },
+    {
+      src: rooms[4].image,
+      alt: rooms[4].name[lang],
+    },
+    {
+      src: propertyImages.hallwayKeypad,
+      alt: lang === "de" ? "Zugangssystem im Flur" : "Access keypad in the hallway",
+    },
+  ];
 
   return (
     <div className="min-h-screen">
@@ -74,11 +99,14 @@ export default function HomePage() {
       {/* Hero */}
       <section className="relative h-screen min-h-[600px] flex items-center justify-center overflow-hidden">
         <img
-          src={heroMain}
-          alt="Ferienzimmer Am Buttermarkt"
+          src={propertyImages.exteriorHero}
+          alt={lang === "de" ? "Ferienzimmer Am Buttermarkt Aussenansicht" : "Ferienzimmer Am Buttermarkt exterior"}
           className="absolute inset-0 w-full h-full object-cover"
           width={1920}
           height={1080}
+          fetchPriority="high"
+          decoding="async"
+          sizes="100vw"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-foreground/50 via-foreground/30 to-foreground/60" />
         <div className="relative z-10 text-center section-padding max-w-4xl mx-auto">
@@ -155,12 +183,21 @@ export default function HomePage() {
           </ScrollReveal>
           <ScrollReveal delay={200}>
             <div className="grid grid-cols-2 gap-4">
-              <div className="img-zoom rounded-xl overflow-hidden">
-                <img src={breakfast} alt="Breakfast" loading="lazy" className="w-full h-48 md:h-64 object-cover" />
-              </div>
-              <div className="img-zoom rounded-xl overflow-hidden mt-8">
-                <img src={adenauVillage} alt="Adenau" loading="lazy" className="w-full h-48 md:h-64 object-cover" />
-              </div>
+              {introImages.map((image, index) => (
+                <div
+                  key={image.src}
+                  className={`img-zoom rounded-xl overflow-hidden ${index === 1 ? "mt-8" : ""}`}
+                >
+                  <img
+                    src={image.src}
+                    alt={image.alt}
+                    loading="lazy"
+                    decoding="async"
+                    sizes="(min-width: 1024px) 25vw, 50vw"
+                    className="w-full h-48 md:h-64 object-cover"
+                  />
+                </div>
+              ))}
             </div>
           </ScrollReveal>
         </div>
@@ -179,8 +216,8 @@ export default function HomePage() {
             <p className="text-muted-foreground">{t("roomsSection", "subtitle")}</p>
           </div>
         </ScrollReveal>
-        <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
-          {rooms.slice(0, 4).map((room, i) => (
+        <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
+          {rooms.map((room, i) => (
             <ScrollReveal key={room.id} delay={i * 100}>
               <RoomCard room={room} />
             </ScrollReveal>
@@ -264,9 +301,16 @@ export default function HomePage() {
       <section className="section-padding py-16">
         <ScrollReveal>
           <div className="max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-4">
-            {[heroMain, breakfast, adenauLandscape, adenauVillage].map((img, i) => (
-              <div key={i} className="img-zoom rounded-lg overflow-hidden aspect-square">
-                <img src={img} alt="" loading="lazy" className="w-full h-full object-cover" />
+            {galleryPreviewItems.map((image) => (
+              <div key={image.src} className="img-zoom rounded-lg overflow-hidden aspect-square">
+                <img
+                  src={image.src}
+                  alt={image.alt}
+                  loading="lazy"
+                  decoding="async"
+                  sizes="(min-width: 768px) 25vw, 50vw"
+                  className="w-full h-full object-cover"
+                />
               </div>
             ))}
           </div>
