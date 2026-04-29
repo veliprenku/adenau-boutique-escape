@@ -3,10 +3,12 @@ import { Link, useLocation } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 
 import BrandLogo from "@/components/BrandLogo";
+import LanguageSwitcher from "@/components/LanguageSwitcher";
 import { useI18n } from "@/lib/i18n";
+import { BOOKING_URL, BRAND_NAME } from "@/lib/site";
 
 export default function Navbar() {
-  const { lang, setLang, t } = useI18n();
+  const { t } = useI18n();
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const location = useLocation();
@@ -41,7 +43,7 @@ export default function Navbar() {
       <div className="section-padding flex items-center justify-between h-20 gap-5">
         <Link
           to="/"
-          aria-label="Ferienzimmer Am Buttermarkt"
+          aria-label={BRAND_NAME}
           className="shrink-0"
         >
           <BrandLogo
@@ -65,26 +67,10 @@ export default function Navbar() {
             </Link>
           ))}
 
-          <div className={`flex items-center gap-1 text-xs font-medium ${textColor}`}>
-            <button
-              type="button"
-              onClick={() => setLang("de")}
-              className={`px-2 py-1 rounded transition-all ${lang === "de" ? "bg-foreground/10" : "opacity-60 hover:opacity-100"}`}
-            >
-              DE
-            </button>
-            <span className="opacity-40">-</span>
-            <button
-              type="button"
-              onClick={() => setLang("en")}
-              className={`px-2 py-1 rounded transition-all ${lang === "en" ? "bg-foreground/10" : "opacity-60 hover:opacity-100"}`}
-            >
-              EN
-            </button>
-          </div>
+          <LanguageSwitcher tone={scrolled || !isHome ? "dark" : "light"} />
 
           <a
-            href="https://www.booking.com"
+            href={BOOKING_URL}
             target="_blank"
             rel="noopener noreferrer"
             className="bg-accent text-accent-foreground px-5 py-2.5 rounded-lg text-sm font-medium transition-all hover:opacity-90 hover:shadow-md"
@@ -116,25 +102,10 @@ export default function Navbar() {
               </Link>
             ))}
 
-            <div className="flex items-center gap-3 pt-2">
-              <button
-                type="button"
-                onClick={() => setLang("de")}
-                className={`px-3 py-1.5 rounded text-sm font-medium transition-all ${lang === "de" ? "bg-secondary text-secondary-foreground" : "text-muted-foreground"}`}
-              >
-                Deutsch
-              </button>
-              <button
-                type="button"
-                onClick={() => setLang("en")}
-                className={`px-3 py-1.5 rounded text-sm font-medium transition-all ${lang === "en" ? "bg-secondary text-secondary-foreground" : "text-muted-foreground"}`}
-              >
-                English
-              </button>
-            </div>
+            <LanguageSwitcher full />
 
             <a
-              href="https://www.booking.com"
+              href={BOOKING_URL}
               target="_blank"
               rel="noopener noreferrer"
               className="bg-accent text-accent-foreground px-5 py-3 rounded-lg text-sm font-medium text-center mt-2"

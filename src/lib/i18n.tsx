@@ -39,27 +39,54 @@ const translations = {
   intro: {
     welcome: { de: "Willkommen in Adenau", en: "Welcome to Adenau" },
     text: {
-      de: "Ferienzimmer Am Buttermarkt bietet Ihnen einen komfortablen Rückzugsort im Herzen von Adenau. Ob Sie die Nürburgring-Atmosphäre erleben, die Eifel erkunden oder einfach zur Ruhe kommen möchten - bei uns finden Sie den perfekten Ausgangspunkt.",
-      en: "Ferienzimmer Am Buttermarkt offers you a comfortable retreat in the heart of Adenau. Whether you want to experience the Nürburgring atmosphere, explore the Eifel, or simply find peace - we provide the perfect starting point.",
+      de: "Buttermarkt House Rooms at the Ring bietet Ihnen einen komfortablen Rückzugsort im Herzen von Adenau. Ob Sie die Nürburgring-Atmosphäre erleben, die Eifel erkunden oder einfach zur Ruhe kommen möchten - bei uns finden Sie den perfekten Ausgangspunkt.",
+      en: "Buttermarkt House Rooms at the Ring offers you a comfortable retreat in the heart of Adenau. Whether you want to experience the Nürburgring atmosphere, explore the Eifel, or simply find peace - we provide the perfect starting point.",
     },
   },
   roomsSection: {
     title: { de: "Unsere Zimmer", en: "Our Rooms" },
     subtitle: { de: "Komfort und Ruhe für jeden Gast", en: "Comfort and calm for every guest" },
-    from: { de: "ab", en: "from" },
+    from: { de: "Ab ca.", en: "From around" },
     perNight: { de: "/ Nacht", en: "/ night" },
     viewDetails: { de: "Details ansehen", en: "View Details" },
     viewAll: { de: "Alle Zimmer ansehen", en: "View All Rooms" },
+    guests: { de: "Gaeste", en: "guests" },
+    livePrice: { de: "Verfuegbarkeit pruefen", en: "Check availability" },
+    bookingNote: {
+      de: "Die angezeigten Preise sind Richtwerte und koennen je nach Datum, Belegung, Steuern und gewaehlter Rate variieren. Die aktuelle Verfuegbarkeit sehen Sie im Buchungsprozess.",
+      en: "Displayed prices are indicative and can vary by date, occupancy, taxes, and selected rate. Current availability is shown during the booking process.",
+    },
+    indexedPrice: { de: "Richtpreis", en: "Indicative price" },
   },
   amenities: {
     title: { de: "Annehmlichkeiten", en: "Amenities" },
     subtitle: { de: "Alles für Ihren Komfort", en: "Everything for your comfort" },
     wifi: { de: "Kostenloses WLAN", en: "Free WiFi" },
     parking: { de: "Kostenlose Parkplätze", en: "Free Parking" },
-    breakfast: { de: "Frühstück verfügbar", en: "Breakfast available" },
-    clean: { de: "Tägliche Reinigung", en: "Daily Cleaning" },
+    access: { de: "Einfacher Zugang", en: "Easy access" },
+    clean: { de: "Gepflegte Zimmer", en: "Well-kept rooms" },
     quiet: { de: "Ruhige Lage", en: "Quiet Location" },
     central: { de: "Zentrale Lage", en: "Central Location" },
+    privateBathroom: { de: "Eigenes Bad", en: "Private bathroom" },
+    coffeeMachine: { de: "Kaffeemaschine", en: "Coffee machine" },
+    flatScreenTv: { de: "Flachbild-TV", en: "Flat-screen TV" },
+    workDesk: { de: "Schreibtisch", en: "Work desk" },
+    familyFriendly: { de: "Familienfreundlich", en: "Family friendly" },
+  },
+  houseGallery: {
+    title: { de: "Ein Blick ins Haus", en: "A Look Inside" },
+    subtitle: {
+      de: "Warme Details, helle Aufenthaltsbereiche und ruhige Plaetze zum Ankommen.",
+      en: "Warm details, bright shared areas, and calm corners to settle in.",
+    },
+    text: {
+      de: "Neben den Zimmern praegen gepflegte Flure, ein gemuetlicher Wohnbereich, klare Zugangspunkte und geschuetzte Aussenplaetze das Gefuehl im Haus. Speisen servieren wir vor Ort nicht.",
+      en: "Beyond the rooms, tidy hallways, a comfortable lounge, clear access points, and sheltered outdoor spaces shape the feel of the house. We do not serve food on site.",
+    },
+  },
+  propertyDetails: {
+    title: { de: "Ankommen, einchecken, wohlfühlen", en: "Arrive, Check In, Settle In" },
+   
   },
   lifestyle: {
     title: { de: "Adenau & Nürburgring", en: "Adenau & Nürburgring" },
@@ -71,9 +98,6 @@ const translations = {
       de: "Die Eifel bietet eine einzigartige Kombination aus Natur, Geschichte und Motorsport. Adenau, das charmante Tor zum Nürburgring, verzaubert mit seinen Fachwerkhäusern, gemütlichen Restaurants und der entspannten Atmosphäre eines traditionellen deutschen Dorfes.",
       en: "The Eifel offers a unique combination of nature, history, and motorsport. Adenau, the charming gateway to the Nürburgring, enchants with its half-timbered houses, cozy restaurants, and the relaxed atmosphere of a traditional German village.",
     },
-  },
-  testimonials: {
-    title: { de: "Gästestimmen", en: "Guest Reviews" },
   },
   faq: {
     title: { de: "Häufige Fragen", en: "Frequently Asked Questions" },
@@ -98,43 +122,51 @@ const translations = {
   about: {
     heroTitle: { de: "Über uns & Adenau", en: "About Us & Adenau" },
     heroSubtitle: {
-      de: "Ein persönliches Gästehaus mit Herz - mitten in der Eifel.",
-      en: "A personal guesthouse with heart - in the heart of the Eifel.",
+      de: "Sechs komfortable Zimmer in Adenau - nahe am Nuerburgring, ruhig gelegen und praktisch ausgestattet.",
+      en: "Six comfortable rooms in Adenau - close to the Nuerburgring, calm, and thoughtfully equipped.",
     },
     storyTitle: { de: "Unser Gästehaus", en: "Our Guesthouse" },
     storyText: {
-      de: "Ferienzimmer Am Buttermarkt liegt im historischen Zentrum von Adenau, direkt am charmanten Buttermarkt. Unser Gästehaus verbindet die Tradition der Eifel mit modernem Komfort. Wir bieten unseren Gästen eine persönliche, herzliche Atmosphäre - ob Sie zum Nürburgring kommen, die Natur genießen oder einfach eine Auszeit suchen.",
-      en: "Ferienzimmer Am Buttermarkt is located in the historic center of Adenau, right on the charming Buttermarkt square. Our guesthouse combines Eifel tradition with modern comfort. We offer our guests a personal, warm atmosphere - whether you're visiting the Nürburgring, enjoying nature, or simply looking for a getaway.",
+      de: "Buttermarkt House Rooms at the Ring ist ein Gaestehaus in Adenau mit sechs Zimmern fuer Touristen, Reisende und Gaeste, die beruflich oder privat in der Eifel unterwegs sind. Die Unterkunft bietet kostenfreie Privatparkplaetze, kostenloses WLAN und Zimmer mit eigenem Bad. Jede Einheit ist mit Kleiderschrank, Schreibtisch, Flachbild-TV und Kaffeemaschine ausgestattet; einige Zimmer verfuegen zudem ueber Balkon und Bergblick.",
+      en: "Buttermarkt House Rooms at the Ring is a guesthouse in Adenau with six rooms for tourists, travelers, and guests visiting the Eifel for work or leisure. The property offers free private parking, free WiFi, and rooms with private bathrooms. Each unit includes a wardrobe, desk, flat-screen TV, and coffee machine; selected rooms also feature a balcony and mountain views.",
     },
     adenauTitle: { de: "Warum Adenau?", en: "Why Adenau?" },
     adenauText: {
-      de: "Adenau ist ein malerisches Städtchen in der Eifel, umgeben von grünen Hügeln und Wäldern. Mit seiner historischen Altstadt, lokalen Restaurants und der unmittelbaren Nähe zum Nürburgring ist es der ideale Ort für einen entspannten Aufenthalt - egal ob Sie Abenteuer oder Ruhe suchen.",
-      en: "Adenau is a picturesque small town in the Eifel, surrounded by green hills and forests. With its historic old town, local restaurants, and proximity to the Nürburgring, it's the ideal place for a relaxed stay - whether you seek adventure or peace.",
+      de: "Adenau ist ein praktischer und angenehmer Ausgangspunkt fuer Ihren Aufenthalt in der Eifel. Die Lage verbindet kurze Wege zum Nuerburgring mit Restaurants, Cafes, Einkaufsmoeglichkeiten und der ruhigen Atmosphaere einer kleinen Stadt.",
+      en: "Adenau is a practical and pleasant base for a stay in the Eifel. The location combines quick access to the Nuerburgring with restaurants, cafes, shops, and the calm atmosphere of a small town.",
     },
     ringTitle: { de: "Nürburgring ganz nah", en: "Nürburgring nearby" },
     ringText: {
-      de: "Die legendäre Nordschleife liegt nur wenige Autominuten entfernt. Ob Rennsport-Wochenende, Touristenfahrten oder Events - von unserem Gästehaus aus erreichen Sie den Ring bequem und schnell.",
-      en: "The legendary Nordschleife is just a short drive away. Whether it's a race weekend, tourist drives, or events - from our guesthouse, you'll reach the Ring quickly and conveniently.",
+      de: "Der Nuerburgring liegt etwa 5,6 Meilen bzw. 9 km von der Unterkunft entfernt. Damit eignet sich Buttermarkt House Rooms at the Ring besonders fuer Motorsport-Wochenenden, Touristenfahrten, Events und kurze Aufenthalte rund um die Strecke.",
+      en: "The Nuerburgring is about 5.6 miles, or 9 km, from the property. This makes Buttermarkt House Rooms at the Ring a strong choice for motorsport weekends, tourist drives, events, and short stays around the track.",
     },
     nearbyTitle: { de: "Umgebung entdecken", en: "Explore the Area" },
     nearbyText: {
-      de: "Wanderwege durch die Eifel, regionale Küche in gemütlichen Gasthäusern, historische Kirchen und der entspannte Rhythmus des Dorflebens - Adenau hat viel zu bieten.",
-      en: "Hiking trails through the Eifel, regional cuisine in cozy inns, historic churches, and the relaxed rhythm of village life - Adenau has much to offer.",
+      de: "Von Adenau aus erreichen Sie weitere Ziele in der Region: die Abtei Maria Laach liegt rund 19 Meilen entfernt, Cochem Castle etwa 28 Meilen, Bonner Kammerspiele und Kurfuerstenbad jeweils rund 27 Meilen. Sportpark Pennenfeld, Museumsmeile und der Alte Bundestag liegen etwa 29 Meilen entfernt; der Flughafen Koeln/Bonn ist rund 43 Meilen entfernt.",
+      en: "From Adenau, several regional destinations are within reach: Monastery Maria Laach is around 19 miles away, Cochem Castle about 28 miles, and Bonner Kammerspiele and Kurfuerstenbad around 27 miles. Sportpark Pennenfeld, Museumsmeile, and the Old Bundestag are about 29 miles away; Cologne Bonn Airport is around 43 miles from the property.",
     },
   },
   contact: {
     heroTitle: { de: "Kontakt", en: "Contact" },
     heroSubtitle: {
-      de: "Wir freuen uns auf Ihre Nachricht.",
-      en: "We look forward to hearing from you.",
+      de: "Schnell anfragen, direkt buchen oder die Route nach Adenau planen.",
+      en: "Send a quick request, book directly, or plan your route to Adenau.",
+    },
+    eyebrow: { de: "Anfrage & Anreise", en: "Request & Arrival" },
+    cardTitle: { de: "Buttermarkt 3, mitten in Adenau", en: "Buttermarkt 3, right in Adenau" },
+    cardText: {
+      de: "Das Haus liegt zentral am Buttermarkt und bleibt trotzdem ein ruhiger Ausgangspunkt fuer Ihren Aufenthalt nahe dem Nuerburgring.",
+      en: "The house sits centrally at Buttermarkt while staying a calm base for your visit near the Nuerburgring.",
     },
     name: { de: "Name", en: "Name" },
     email: { de: "E-Mail", en: "Email" },
     message: { de: "Nachricht", en: "Message" },
     send: { de: "Nachricht senden", en: "Send Message" },
+    openMail: { de: "E-Mail oeffnen", en: "Open email" },
+    directions: { de: "Route planen", en: "Get directions" },
     phone: { de: "Telefon", en: "Phone" },
     address: { de: "Adresse", en: "Address" },
-    info: { de: "Kontaktinformationen", en: "Contact Information" },
+    info: { de: "Kontakt direkt", en: "Direct contact" },
   },
   roomDetail: {
     backToRooms: { de: "Zurück zu den Zimmern", en: "Back to Rooms" },
@@ -142,6 +174,16 @@ const translations = {
     bookNow: { de: "Jetzt buchen", en: "Book Now" },
     relatedRooms: { de: "Weitere Zimmer", en: "Other Rooms" },
     perNight: { de: "pro Nacht", en: "per night" },
+    bookingDetails: { de: "Zimmerdetails", en: "Room details" },
+    bookingType: { de: "Zimmerkategorie", en: "Room type" },
+    capacity: { de: "Kapazitaet", en: "Capacity" },
+    bedSetup: { de: "Betten", en: "Beds" },
+    roomSize: { de: "Groesse", en: "Size" },
+    livePriceNote: {
+      de: "Der angezeigte Preis ist ein Richtwert. Aktuelle Preise und Verfuegbarkeit sehen Sie im Buchungsprozess.",
+      en: "The displayed price is indicative. Current rates and availability are shown during the booking process.",
+    },
+    indexedPrice: { de: "Richtpreis", en: "Indicative price" },
   },
 } as const;
 
@@ -188,9 +230,8 @@ export function I18nProvider({ children }: { children: ReactNode }) {
   };
 
   const t = (section: keyof Translations, key: string): string => {
-    const sec = translations[section] as any;
-    if (!sec || !sec[key]) return key;
-    return sec[key][lang] || key;
+    const sec = translations[section] as Record<string, Partial<Record<Lang, string>>>;
+    return sec[key]?.[lang] || key;
   };
 
   return (

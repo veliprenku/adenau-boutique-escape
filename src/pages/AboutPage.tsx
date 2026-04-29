@@ -2,12 +2,14 @@ import { useI18n } from "@/lib/i18n";
 import ScrollReveal from "@/components/ScrollReveal";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import Seo from "@/components/Seo";
 import ConsentMapEmbed from "@/components/ConsentMapEmbed";
 import adenauLandscape from "@/assets/adenau-landscape.jpg";
 import adenauVillage from "@/assets/adenau-village.jpg";
 import nuerburgring from "@/assets/nuerburgring.jpg";
 import { propertyImages } from "@/lib/media";
-import { rooms } from "@/lib/rooms";
+import { BRAND_NAME, DEFAULT_DESCRIPTION } from "@/lib/site";
+import { BriefcaseBusiness, Car, Coffee, MapPin, Monitor, ShowerHead, UsersRound, Wifi } from "lucide-react";
 
 export default function AboutPage() {
   const { lang, t } = useI18n();
@@ -19,7 +21,7 @@ export default function AboutPage() {
     {
       title: t("about", "storyTitle"),
       text: t("about", "storyText"),
-      image: rooms[0].image,
+      image: propertyImages.guestLounge,
     },
     {
       title: t("about", "adenauTitle"),
@@ -37,16 +39,34 @@ export default function AboutPage() {
       image: adenauLandscape,
     },
   ];
+  const propertyHighlights = [
+    { icon: UsersRound, label: lang === "de" ? "6 Zimmer" : "6 rooms" },
+    { icon: ShowerHead, label: t("amenities", "privateBathroom") },
+    { icon: Wifi, label: t("amenities", "wifi") },
+    { icon: Car, label: t("amenities", "parking") },
+    { icon: Coffee, label: t("amenities", "coffeeMachine") },
+    { icon: Monitor, label: t("amenities", "flatScreenTv") },
+    { icon: BriefcaseBusiness, label: t("amenities", "workDesk") },
+    { icon: MapPin, label: lang === "de" ? "Balkon & Bergblick in einigen Zimmern" : "Balcony & mountain views in selected rooms" },
+  ];
 
   return (
     <div className="min-h-screen">
+      <Seo
+        title={lang === "de" ? "Ueber uns" : "About"}
+        description={
+          lang === "de"
+            ? "Buttermarkt House Rooms at the Ring in Adenau: sechs Zimmer mit eigenem Bad, kostenfreiem WLAN, Privatparkplaetzen, Kaffeemaschine und Naehe zum Nuerburgring."
+            : DEFAULT_DESCRIPTION
+        }
+      />
       <Navbar />
 
       {/* Hero */}
       <section className="relative h-[50vh] min-h-[400px]">
         <img
           src={propertyImages.exteriorHero}
-          alt={lang === "de" ? "Ferienzimmer Am Buttermarkt Aussenansicht" : "Ferienzimmer Am Buttermarkt exterior"}
+          alt={lang === "de" ? `${BRAND_NAME} Aussenansicht` : `${BRAND_NAME} exterior`}
           className="absolute inset-0 w-full h-full object-cover"
           fetchPriority="high"
           decoding="async"
@@ -63,6 +83,22 @@ export default function AboutPage() {
         </div>
       </section>
 
+      <section className="section-padding py-12 bg-background">
+        <ScrollReveal>
+          <div className="mx-auto grid max-w-6xl grid-cols-2 gap-3 md:grid-cols-4">
+            {propertyHighlights.map((item) => (
+              <div
+                key={item.label}
+                className="rounded-lg border border-border/60 bg-card p-4 shadow-[0_14px_45px_rgba(30,35,38,0.05)]"
+              >
+                <item.icon size={19} className="mb-3 text-accent" />
+                <p className="text-sm font-medium leading-snug">{item.label}</p>
+              </div>
+            ))}
+          </div>
+        </ScrollReveal>
+      </section>
+
       {/* Content sections */}
       {sections.map((sec, i) => (
         <section key={i} className={`section-padding section-spacing ${i % 2 === 1 ? "bg-secondary/50" : ""}`}>
@@ -76,7 +112,7 @@ export default function AboutPage() {
               </div>
             </ScrollReveal>
             <ScrollReveal delay={200}>
-              <div className="img-zoom rounded-xl overflow-hidden lg:[direction:ltr]">
+              <div className="img-zoom rounded-lg overflow-hidden shadow-[0_20px_70px_rgba(30,35,38,0.1)] lg:[direction:ltr]">
                 <img
                   src={sec.image}
                   alt={sec.title}
@@ -99,7 +135,7 @@ export default function AboutPage() {
               {lang === "de" ? "So finden Sie uns" : "How to find us"}
             </h2>
             <ConsentMapEmbed
-              iframeTitle={lang === "de" ? "Karte zum Ferienzimmer Am Buttermarkt" : "Map to Ferienzimmer Am Buttermarkt"}
+              iframeTitle={lang === "de" ? `Karte zum ${BRAND_NAME}` : `Map to ${BRAND_NAME}`}
               src={mapEmbedUrl}
               mapsLink={mapDirectionsUrl}
               heightClassName="h-[400px]"

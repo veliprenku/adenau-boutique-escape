@@ -4,11 +4,12 @@ import ScrollReveal from "@/components/ScrollReveal";
 import RoomCard from "@/components/RoomCard";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import Seo from "@/components/Seo";
 import { Link } from "react-router-dom";
-import { MapPin, Sun, CalendarCheck, Wifi, Car, Coffee, Sparkles, TreePine, ChevronDown, Star, Quote } from "lucide-react";
+import { MapPin, Sun, CalendarCheck, Wifi, Car, KeyRound, Coffee, TreePine, ChevronDown } from "lucide-react";
 import nuerburgring from "@/assets/nuerburgring.jpg";
-import { useState } from "react";
 import { propertyImages } from "@/lib/media";
+import { BOOKING_URL, BRAND_NAME, DEFAULT_DESCRIPTION, SITE_URL } from "@/lib/site";
 import {
   Accordion,
   AccordionContent,
@@ -16,53 +17,33 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 
-const testimonials = [
-  {
-    name: "Thomas M.",
-    location: "Köln",
-    text: {
-      de: "Perfekte Lage für unser Nürburgring-Wochenende. Sauber, ruhig und die Gastgeber sind sehr freundlich.",
-      en: "Perfect location for our Nürburgring weekend. Clean, quiet, and the hosts are very friendly.",
-    },
-  },
-  {
-    name: "Sarah K.",
-    location: "Amsterdam",
-    text: {
-      de: "Ein wunderbares kleines Gästehaus. Die Zimmer sind hell und gemütlich. Adenau ist ein Traum!",
-      en: "A wonderful little guesthouse. The rooms are bright and cozy. Adenau is a dream!",
-    },
-  },
-  {
-    name: "Marco R.",
-    location: "München",
-    text: {
-      de: "Schon zum dritten Mal hier. Die Lage am Buttermarkt ist ideal, und man fühlt sich sofort willkommen.",
-      en: "Third time staying here. The location on the Buttermarkt is ideal, and you immediately feel welcome.",
-    },
-  },
-];
-
 const faqItems = {
   de: [
-    { q: "Wie weit ist der Nürburgring entfernt?", a: "Der Nürburgring ist nur etwa 5 Autominuten entfernt. Die Nordschleife erreichen Sie in weniger als 10 Minuten." },
-    { q: "Gibt es Parkplätze?", a: "Ja, kostenfreie Parkplätze stehen für unsere Gäste direkt am Haus zur Verfügung." },
-    { q: "Bieten Sie Frühstück an?", a: "Ja, auf Wunsch bereiten wir Ihnen gerne ein Frühstück zu. Bitte teilen Sie uns dies bei der Buchung mit." },
-    { q: "Kann ich direkt buchen?", a: "Sie können uns telefonisch oder per E-Mail kontaktieren. Alternativ buchen Sie über Booking.com." },
-    { q: "Sind Haustiere erlaubt?", a: "Haustiere sind nach vorheriger Absprache willkommen. Bitte kontaktieren Sie uns vorab." },
+    { q: "Wann ist der Check-in?", a: "Der Check-in ist von 15:00 bis 18:00 Uhr moeglich. Besondere Anfragen koennen beim Buchen angegeben werden." },
+    { q: "Wann ist der Check-out?", a: "Der Check-out ist von 08:00 bis 11:00 Uhr vorgesehen." },
+    { q: "Wie weit ist der Nürburgring entfernt?", a: "Der Nürburgring ist etwa 9 km entfernt. Die Nordschleife erreichen Sie in wenigen Autominuten." },
+    { q: "Gibt es Parkplätze?", a: "Ja, kostenfreie private Parkplätze stehen direkt an der Unterkunft zur Verfügung." },
+    { q: "Servieren Sie Speisen vor Ort?", a: "Nein, wir servieren keine Speisen vor Ort. Restaurants, Cafes und Einkaufsmoeglichkeiten finden Sie in Adenau in der Naehe." },
+    { q: "Sind Kinder willkommen?", a: "Ja, Kinder jeden Alters sind willkommen. Kinder ab 18 Jahren gelten in dieser Unterkunft als Erwachsene." },
+    { q: "Gibt es Babybetten oder Zustellbetten?", a: "Nein, Babybetten und Zustellbetten sind in dieser Unterkunft nicht verfuegbar." },
+    { q: "Sind Haustiere erlaubt?", a: "Nein, Haustiere sind nicht erlaubt." },
+    { q: "Wie funktionieren Stornierung und Vorauszahlung?", a: "Stornierungs- und Vorauszahlungsbedingungen koennen je nach Zimmerkategorie und Rate unterschiedlich sein. Bitte pruefen Sie die Bedingungen direkt bei der Buchung." },
   ],
   en: [
-    { q: "How far is the Nürburgring?", a: "The Nürburgring is only about a 5-minute drive away. You can reach the Nordschleife in less than 10 minutes." },
-    { q: "Is parking available?", a: "Yes, free parking is available for our guests directly at the house." },
-    { q: "Do you offer breakfast?", a: "Yes, we are happy to prepare breakfast on request. Please let us know when booking." },
-    { q: "Can I book directly?", a: "You can contact us by phone or email. Alternatively, book via Booking.com." },
-    { q: "Are pets allowed?", a: "Pets are welcome by prior arrangement. Please contact us in advance." },
+    { q: "What time is check-in?", a: "Check-in is available from 3:00 PM to 6:00 PM. Special requests can be added during the booking step." },
+    { q: "What time is check-out?", a: "Check-out is from 8:00 AM to 11:00 AM." },
+    { q: "How far is the Nürburgring?", a: "The Nürburgring is about 9 km away. You can reach the Nordschleife within a short drive." },
+    { q: "Is parking available?", a: "Yes, free private parking is available on site for guests." },
+    { q: "Do you serve food on site?", a: "No, we do not serve food on site. Restaurants, cafes, and shops are available nearby in Adenau." },
+    { q: "Are children welcome?", a: "Yes, children of all ages are welcome. Children aged 18 and above are charged as adults at this property." },
+    { q: "Are cribs or extra beds available?", a: "No, cribs and extra beds are not available at this property." },
+    { q: "Are pets allowed?", a: "No, pets are not allowed." },
+    { q: "How do cancellation and prepayment work?", a: "Cancellation and prepayment policies can vary by room type and rate. Please check the conditions directly when booking." },
   ],
 };
 
 export default function HomePage() {
   const { lang, t } = useI18n();
-  const [testimonialIdx, setTestimonialIdx] = useState(0);
   const introImages = [
     {
       src: rooms[0].image,
@@ -75,32 +56,89 @@ export default function HomePage() {
   ];
   const galleryPreviewItems = [
     {
-      src: propertyImages.entranceDetail,
-      alt: lang === "de" ? "Eingangsbereich des Gaestehauses" : "Guesthouse entrance detail",
+      src: propertyImages.roomDoorDetail,
+      alt: lang === "de" ? "Zimmertuer und Zugang im Haus" : "Room door and access in the house",
     },
     {
-      src: rooms[2].image,
-      alt: rooms[2].name[lang],
+      src: propertyImages.guestLounge,
+      alt: lang === "de" ? "Wohnbereich im Haus" : "Guest lounge in the house",
     },
     {
-      src: rooms[4].image,
-      alt: rooms[4].name[lang],
+      src: propertyImages.coveredTerrace,
+      alt: lang === "de" ? "Ueberdachter Aussenbereich" : "Covered outdoor terrace",
     },
     {
-      src: propertyImages.hallwayKeypad,
-      alt: lang === "de" ? "Zugangssystem im Flur" : "Access keypad in the hallway",
+      src: rooms[5].image,
+      alt: rooms[5].name[lang],
+    },
+  ];
+  const houseImages = [
+    {
+      src: propertyImages.guestLounge,
+      alt: lang === "de" ? "Wohnbereich mit Sofa" : "Lounge area with sofa",
+      className: "md:col-span-2 md:row-span-2",
+    },
+    {
+      src: propertyImages.stairwellBright,
+      alt: lang === "de" ? "Helles Treppenhaus" : "Bright stairwell",
+      className: "",
+    },
+    {
+      src: propertyImages.entryStaircase,
+      alt: lang === "de" ? "Treppenhaus und Eingang" : "Staircase and entry",
+      className: "",
+    },
+    {
+      src: propertyImages.balconyView,
+      alt: lang === "de" ? "Blick vom Balkon" : "Balcony view",
+      className: "",
+    },
+    {
+      src: propertyImages.upperHallway,
+      alt: lang === "de" ? "Heller Flurbereich" : "Bright hallway area",
+      className: "",
+    },
+  ];
+  const propertyDetailImages = [
+    {
+      src: propertyImages.frontApproach,
+      alt: lang === "de" ? "Aussenansicht und Ankunft" : "Exterior arrival view",
+    },
+    {
+      src: propertyImages.streetExterior,
+      alt: lang === "de" ? "Aussenansicht von der Strasse" : "Street exterior view",
+    },
+    {
+      src: propertyImages.stairDetail,
+      alt: lang === "de" ? "Treppendetail im Haus" : "Stair detail in the house",
+    },
+    {
+      src: propertyImages.guestDetail,
+      alt: lang === "de" ? "Zimmerdetail mit Ausstattung" : "Room detail with amenities",
+    },
+    {
+      src: propertyImages.quietSeating,
+      alt: lang === "de" ? "Ruhiger Sitzbereich" : "Quiet seating area",
+    },
+    {
+      src: propertyImages.houseExteriorSide,
+      alt: lang === "de" ? "Seitliche Hausansicht" : "Side view of the house",
     },
   ];
 
   return (
     <div className="min-h-screen">
+      <Seo
+        description={DEFAULT_DESCRIPTION}
+        image={`${SITE_URL}/apple-touch-icon.png`}
+      />
       <Navbar />
 
       {/* Hero */}
-      <section className="relative h-screen min-h-[600px] flex items-center justify-center overflow-hidden">
+      <section className="relative h-screen min-h-[640px] flex items-center justify-center overflow-hidden">
         <img
           src={propertyImages.exteriorHero}
-          alt={lang === "de" ? "Ferienzimmer Am Buttermarkt Aussenansicht" : "Ferienzimmer Am Buttermarkt exterior"}
+          alt={lang === "de" ? `${BRAND_NAME} Aussenansicht` : `${BRAND_NAME} exterior`}
           className="absolute inset-0 w-full h-full object-cover"
           width={1920}
           height={1080}
@@ -108,12 +146,15 @@ export default function HomePage() {
           decoding="async"
           sizes="100vw"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-foreground/50 via-foreground/30 to-foreground/60" />
-        <div className="relative z-10 text-center section-padding max-w-4xl mx-auto">
-          <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-semibold text-primary-foreground mb-6 animate-fade-up leading-tight">
+        <div className="absolute inset-0 bg-gradient-to-b from-black/55 via-charcoal/28 to-black/70" />
+        <div className="relative z-10 text-center section-padding max-w-5xl mx-auto">
+          <p className="mb-5 animate-fade-up text-xs font-semibold uppercase tracking-[0.28em] text-primary-foreground/80">
+            {BRAND_NAME}
+          </p>
+          <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-semibold text-primary-foreground mb-6 animate-fade-up leading-tight" style={{ animationDelay: "80ms" }}>
             {t("hero", "title")}
           </h1>
-          <p className="text-primary-foreground/85 text-lg md:text-xl font-sans font-light max-w-2xl mx-auto mb-10 animate-fade-up" style={{ animationDelay: "200ms" }}>
+          <p className="text-primary-foreground/90 text-lg md:text-xl font-sans font-light max-w-2xl mx-auto mb-10 animate-fade-up" style={{ animationDelay: "220ms" }}>
             {t("hero", "subtitle")}
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 animate-fade-up" style={{ animationDelay: "400ms" }}>
@@ -124,7 +165,7 @@ export default function HomePage() {
               {t("hero", "explore")}
             </Link>
             <a
-              href="https://www.booking.com"
+              href={BOOKING_URL}
               target="_blank"
               rel="noopener noreferrer"
               className="bg-accent text-accent-foreground px-8 py-3.5 rounded-lg font-medium text-sm tracking-wide transition-all hover:opacity-90 hover:shadow-lg"
@@ -139,7 +180,7 @@ export default function HomePage() {
       </section>
 
       {/* Features */}
-      <section className="section-padding py-20 md:py-24">
+      <section className="section-padding py-20 md:py-24 bg-background">
         <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
           {[
             { icon: MapPin, title: t("features", "ring"), desc: t("features", "ringDesc") },
@@ -147,8 +188,8 @@ export default function HomePage() {
             { icon: CalendarCheck, title: t("features", "booking"), desc: t("features", "bookingDesc") },
           ].map((feat, i) => (
             <ScrollReveal key={i} delay={i * 150}>
-              <div className="text-center p-8 rounded-xl bg-card border border-border/50 transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
-                <div className="w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center mx-auto mb-5">
+              <div className="text-center p-8 rounded-lg bg-card border border-border/60 shadow-[0_18px_60px_rgba(30,35,38,0.06)] transition-all duration-300 hover:shadow-[0_24px_70px_rgba(30,35,38,0.1)] hover:-translate-y-1">
+                <div className="w-12 h-12 rounded-full bg-accent/10 ring-1 ring-accent/15 flex items-center justify-center mx-auto mb-5">
                   <feat.icon size={22} className="text-accent" />
                 </div>
                 <h3 className="font-serif text-lg font-semibold mb-3">{feat.title}</h3>
@@ -160,7 +201,7 @@ export default function HomePage() {
       </section>
 
       {/* Intro */}
-      <section className="section-padding section-spacing bg-secondary/50">
+      <section className="section-padding section-spacing bg-secondary/40">
         <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
           <ScrollReveal>
             <div>
@@ -186,7 +227,7 @@ export default function HomePage() {
               {introImages.map((image, index) => (
                 <div
                   key={image.src}
-                  className={`img-zoom rounded-xl overflow-hidden ${index === 1 ? "mt-8" : ""}`}
+                  className={`img-zoom rounded-lg overflow-hidden shadow-[0_20px_60px_rgba(30,35,38,0.12)] ${index === 1 ? "mt-8" : ""}`}
                 >
                   <img
                     src={image.src}
@@ -252,13 +293,13 @@ export default function HomePage() {
           {[
             { icon: Wifi, label: t("amenities", "wifi") },
             { icon: Car, label: t("amenities", "parking") },
-            { icon: Coffee, label: t("amenities", "breakfast") },
-            { icon: Sparkles, label: t("amenities", "clean") },
+            { icon: KeyRound, label: t("amenities", "access") },
+            { icon: Coffee, label: t("amenities", "coffeeMachine") },
             { icon: TreePine, label: t("amenities", "quiet") },
             { icon: MapPin, label: t("amenities", "central") },
           ].map((item, i) => (
             <ScrollReveal key={i} delay={i * 80}>
-              <div className="flex items-center gap-4 p-5 rounded-xl bg-background border border-border/50 transition-all duration-300 hover:shadow-md">
+              <div className="flex items-center gap-4 p-5 rounded-lg bg-background border border-border/50 transition-all duration-300 hover:shadow-md">
                 <item.icon size={20} className="text-accent shrink-0" />
                 <span className="text-sm font-medium">{item.label}</span>
               </div>
@@ -267,11 +308,88 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* House impressions */}
+      <section className="section-padding section-spacing bg-secondary/35">
+        <div className="max-w-6xl mx-auto grid grid-cols-1 gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:items-center">
+          <ScrollReveal>
+            <div>
+              <p className="text-accent text-sm font-medium tracking-widest uppercase mb-3">
+                {lang === "de" ? "Im Haus" : "Inside the house"}
+              </p>
+              <h2 className="font-serif text-3xl md:text-4xl font-semibold mb-5">
+                {t("houseGallery", "title")}
+              </h2>
+              <p className="text-muted-foreground text-lg leading-relaxed mb-5">
+                {t("houseGallery", "subtitle")}
+              </p>
+              <p className="text-muted-foreground leading-relaxed">
+                {t("houseGallery", "text")}
+              </p>
+            </div>
+          </ScrollReveal>
+          <ScrollReveal delay={200}>
+            <div className="grid auto-rows-[10rem] grid-cols-2 gap-4 md:auto-rows-[12rem]">
+              {houseImages.map((image) => (
+                <div
+                  key={image.src}
+                  className={`img-zoom overflow-hidden rounded-lg shadow-[0_20px_70px_rgba(30,35,38,0.1)] ${image.className}`}
+                >
+                  <img
+                    src={image.src}
+                    alt={image.alt}
+                    loading="lazy"
+                    decoding="async"
+                    sizes="(min-width: 1024px) 35vw, 50vw"
+                    className="h-full w-full object-cover"
+                  />
+                </div>
+              ))}
+            </div>
+          </ScrollReveal>
+        </div>
+      </section>
+
+      {/* Property details */}
+      <section className="section-padding py-16 md:py-24">
+        <ScrollReveal>
+          <div className="mx-auto mb-12 max-w-2xl text-center">
+            <p className="mb-3 text-sm font-medium uppercase tracking-widest text-accent">
+              {lang === "de" ? "Details" : "Details"}
+            </p>
+            <h2 className="mb-4 font-serif text-3xl font-semibold md:text-4xl">
+              {t("propertyDetails", "title")}
+            </h2>
+           
+          </div>
+        </ScrollReveal>
+        <ScrollReveal delay={150}>
+          <div className="mx-auto grid max-w-6xl grid-cols-2 gap-4 md:grid-cols-3">
+            {propertyDetailImages.map((image, index) => (
+              <div
+                key={image.src}
+                className={`img-zoom overflow-hidden rounded-lg shadow-[0_18px_55px_rgba(30,35,38,0.08)] ${
+                  index === 0 || index === 5 ? "aspect-[4/3]" : "aspect-square"
+                }`}
+              >
+                <img
+                  src={image.src}
+                  alt={image.alt}
+                  loading="lazy"
+                  decoding="async"
+                  sizes="(min-width: 768px) 33vw, 50vw"
+                  className="h-full w-full object-cover"
+                />
+              </div>
+            ))}
+          </div>
+        </ScrollReveal>
+      </section>
+
       {/* Lifestyle / Adenau + Nürburgring */}
       <section className="section-padding section-spacing">
         <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <ScrollReveal>
-            <div className="img-zoom rounded-xl overflow-hidden">
+            <div className="img-zoom rounded-lg overflow-hidden shadow-[0_20px_70px_rgba(30,35,38,0.1)]">
               <img src={nuerburgring} alt="Nürburgring" loading="lazy" className="w-full h-80 md:h-[28rem] object-cover" />
             </div>
           </ScrollReveal>
@@ -317,45 +435,6 @@ export default function HomePage() {
         </ScrollReveal>
       </section>
 
-      {/* Testimonials */}
-      <section className="section-padding section-spacing bg-secondary/50">
-        <ScrollReveal>
-          <div className="max-w-3xl mx-auto text-center">
-            <p className="text-accent text-sm font-medium tracking-widest uppercase mb-3">
-              {lang === "de" ? "Bewertungen" : "Reviews"}
-            </p>
-            <h2 className="font-serif text-3xl md:text-4xl font-semibold mb-12">
-              {t("testimonials", "title")}
-            </h2>
-            <div className="relative">
-              <Quote size={32} className="text-accent/20 mx-auto mb-4" />
-              <p className="font-serif text-xl md:text-2xl italic text-foreground/80 mb-6 leading-relaxed min-h-[6rem]">
-                "{testimonials[testimonialIdx].text[lang]}"
-              </p>
-              <div className="flex items-center justify-center gap-1 mb-2">
-                {[...Array(5)].map((_, i) => (
-                  <Star key={i} size={14} className="fill-bronze text-bronze" />
-                ))}
-              </div>
-              <p className="font-medium text-sm">{testimonials[testimonialIdx].name}</p>
-              <p className="text-muted-foreground text-xs">{testimonials[testimonialIdx].location}</p>
-              <div className="flex justify-center gap-2 mt-8">
-                {testimonials.map((_, i) => (
-                  <button
-                    key={i}
-                    onClick={() => setTestimonialIdx(i)}
-                    className={`w-2.5 h-2.5 rounded-full transition-all ${
-                      i === testimonialIdx ? "bg-accent scale-110" : "bg-border hover:bg-stone"
-                    }`}
-                    aria-label={`Testimonial ${i + 1}`}
-                  />
-                ))}
-              </div>
-            </div>
-          </div>
-        </ScrollReveal>
-      </section>
-
       {/* FAQ */}
       <section className="section-padding section-spacing">
         <ScrollReveal>
@@ -371,7 +450,7 @@ export default function HomePage() {
                 <AccordionItem
                   key={i}
                   value={`faq-${i}`}
-                  className="bg-card border border-border/50 rounded-xl px-6 data-[state=open]:shadow-md transition-shadow"
+                  className="bg-card border border-border/50 rounded-lg px-6 data-[state=open]:shadow-md transition-shadow"
                 >
                   <AccordionTrigger className="font-medium text-left hover:no-underline py-5">
                     {item.q}
@@ -397,7 +476,7 @@ export default function HomePage() {
               {t("cta", "subtitle")}
             </p>
             <a
-              href="https://www.booking.com"
+              href={BOOKING_URL}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-block bg-accent text-accent-foreground px-10 py-4 rounded-lg font-medium tracking-wide transition-all hover:opacity-90 hover:shadow-xl"

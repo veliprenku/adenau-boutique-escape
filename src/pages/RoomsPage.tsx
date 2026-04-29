@@ -4,12 +4,22 @@ import ScrollReveal from "@/components/ScrollReveal";
 import RoomCard from "@/components/RoomCard";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import Seo from "@/components/Seo";
+import { BOOKING_URL } from "@/lib/site";
 
 export default function RoomsPage() {
   const { lang, t } = useI18n();
 
   return (
     <div className="min-h-screen">
+      <Seo
+        title={lang === "de" ? "Zimmer" : "Rooms"}
+        description={
+          lang === "de"
+            ? "Zimmer in Adenau am Buttermarkt nahe dem Nuerburgring: komfortable Doppelzimmer und Familienzimmer mit WLAN, Parkplaetzen und ruhiger Lage."
+            : "Rooms in Adenau at Buttermarkt near the Nuerburgring: comfortable double rooms and family rooms with WiFi, parking, and a calm location."
+        }
+      />
       <Navbar />
 
       {/* Hero */}
@@ -36,6 +46,21 @@ export default function RoomsPage() {
             </ScrollReveal>
           ))}
         </div>
+        <ScrollReveal>
+          <div className="mx-auto mt-12 max-w-3xl rounded-lg border border-border/60 bg-card p-6 text-center shadow-[0_18px_60px_rgba(30,35,38,0.06)]">
+            <p className="text-sm leading-relaxed text-muted-foreground">
+              {t("roomsSection", "bookingNote")}
+            </p>
+            <a
+              href={BOOKING_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-5 inline-block rounded-lg bg-accent px-6 py-3 text-sm font-medium text-accent-foreground transition-all hover:opacity-90"
+            >
+              {t("roomsSection", "livePrice")}
+            </a>
+          </div>
+        </ScrollReveal>
       </section>
 
       {/* CTA */}
@@ -47,7 +72,7 @@ export default function RoomsPage() {
             </h2>
             <p className="opacity-70 mb-8">{t("cta", "subtitle")}</p>
             <a
-              href="https://www.booking.com"
+              href={BOOKING_URL}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-block bg-accent text-accent-foreground px-10 py-4 rounded-lg font-medium transition-all hover:opacity-90"

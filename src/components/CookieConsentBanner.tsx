@@ -85,7 +85,7 @@ export default function CookieConsentBanner() {
     <>
       {!preferences && !isPreferencesOpen && (
         <div className="fixed inset-x-4 bottom-4 z-[60] md:left-6 md:right-auto md:bottom-6 md:max-w-xl">
-          <div className="rounded-[1.75rem] border border-border/70 bg-background/96 p-5 shadow-[0_32px_90px_-48px_rgba(15,23,42,0.65)] backdrop-blur-xl">
+          <div className="rounded-lg border border-border/70 bg-background p-5 shadow-[0_32px_90px_-48px_rgba(15,23,42,0.65)]">
             <div className="mb-4 flex items-start justify-between gap-4">
               <div>
                 <p className="mb-2 inline-flex items-center gap-2 rounded-full border border-accent/15 bg-accent/5 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.28em] text-accent">
@@ -134,7 +134,7 @@ export default function CookieConsentBanner() {
       )}
 
       <Dialog open={isPreferencesOpen} onOpenChange={(open) => (open ? openPreferences() : closePreferences())}>
-        <DialogContent className="max-w-2xl rounded-[1.75rem] border-border/70 bg-background p-0 overflow-hidden">
+        <DialogContent className="max-w-2xl rounded-lg border-border/70 bg-background p-0 overflow-hidden">
           <div className="border-b border-border/60 bg-secondary/35 px-6 py-5">
             <DialogHeader className="space-y-2 text-left">
               <DialogTitle className="font-serif text-2xl">
@@ -147,7 +147,7 @@ export default function CookieConsentBanner() {
           </div>
 
           <div className="space-y-4 px-6 py-6">
-            <div className="rounded-2xl border border-border/60 bg-card p-5">
+            <div className="rounded-lg border border-border/60 bg-card p-5">
               <div className="flex items-start justify-between gap-4">
                 <div>
                   <p className="font-medium text-foreground">{copy.necessaryTitle}</p>
@@ -161,7 +161,7 @@ export default function CookieConsentBanner() {
               </div>
             </div>
 
-            <div className="rounded-2xl border border-border/60 bg-card p-5">
+            <div className="rounded-lg border border-border/60 bg-card p-5">
               <div className="flex items-start justify-between gap-4">
                 <div className="max-w-xl">
                   <div className="flex items-center gap-2">

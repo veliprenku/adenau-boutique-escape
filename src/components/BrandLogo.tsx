@@ -1,5 +1,11 @@
 import darkLogo from "@/assets/logo.png";
 import lightLogo from "@/assets/logo-white.png";
+import {
+  BRAND_NAME,
+  BRAND_PRIMARY,
+  BRAND_SECONDARY,
+  BRAND_SUBTITLE,
+} from "@/lib/site";
 import { cn } from "@/lib/utils";
 
 interface BrandLogoProps {
@@ -8,9 +14,6 @@ interface BrandLogoProps {
   showSubtitle?: boolean;
   className?: string;
 }
-
-const brandName = "Ferienzimmer Am Buttermarkt";
-const brandSubtitle = "Adenau - Nürburgring";
 
 export default function BrandLogo({
   tone = "dark",
@@ -24,7 +27,7 @@ export default function BrandLogo({
     <div className={cn("flex items-center gap-3", className)}>
       <img
         src={logoSrc}
-        alt={`${brandName} logo`}
+        alt={`${BRAND_NAME} logo`}
         decoding="async"
         className={cn(
           "w-auto shrink-0",
@@ -36,12 +39,13 @@ export default function BrandLogo({
       <div className="min-w-0">
         <p
           className={cn(
-            "font-serif font-semibold leading-none tracking-tight",
-            compact ? "text-sm sm:text-base" : "text-xl",
+            "font-serif font-semibold leading-tight tracking-normal",
+            compact ? "max-w-[13rem] text-[0.82rem] sm:max-w-[15rem] sm:text-sm" : "max-w-[17rem] text-lg",
             tone === "light" ? "text-primary-foreground" : "text-foreground",
           )}
         >
-          {brandName}
+          <span className="block">{BRAND_PRIMARY}</span>
+          <span className="block">{BRAND_SECONDARY}</span>
         </p>
 
         {showSubtitle && (
@@ -54,7 +58,7 @@ export default function BrandLogo({
                 : "text-muted-foreground",
             )}
           >
-            {brandSubtitle}
+            {BRAND_SUBTITLE}
           </p>
         )}
       </div>

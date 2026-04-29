@@ -6,13 +6,15 @@ import RoomCard from "@/components/RoomCard";
 import RoomGallery from "@/components/RoomGallery";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { ArrowLeft, Check } from "lucide-react";
+import Seo from "@/components/Seo";
+import { BOOKING_URL, BRAND_NAME, SITE_URL } from "@/lib/site";
+import { ArrowLeft, BedDouble, Check, Maximize2, Users } from "lucide-react";
 
 export default function RoomDetailPage() {
   const { slug } = useParams<{ slug: string }>();
   const { lang, t } = useI18n();
 
-  const room = rooms.find((r) => r.slug === slug);
+  const room = rooms.find((r) => r.slug === slug || r.id === slug);
 
   if (!room) {
     return (
@@ -26,6 +28,28 @@ export default function RoomDetailPage() {
 
   return (
     <div className="min-h-screen">
+      <Seo
+        title={room.name[lang]}
+        description={`${room.name[lang]} at ${BRAND_NAME} in Adenau near the Nuerburgring. ${room.description[lang]}`}
+        image={`${SITE_URL}${room.image}`}
+        jsonLd={{
+          "@context": "https://schema.org",
+          "@type": "HotelRoom",
+          name: room.name[lang],
+          description: room.longDescription[lang],
+          containedInPlace: {
+            "@type": "LodgingBusiness",
+            name: BRAND_NAME,
+            url: SITE_URL,
+          },
+          offers: {
+            "@type": "Offer",
+            price: room.price,
+            priceCurrency: "EUR",
+            url: BOOKING_URL,
+          },
+        }}
+      />
       <Navbar />
 
       {/* Hero image */}
@@ -85,11 +109,61 @@ export default function RoomDetailPage() {
                 ))}
               </div>
             </ScrollReveal>
+
+            <ScrollReveal delay={180}>
+              <div className="mb-10 rounded-lg border border-border/60 bg-card p-6 shadow-[0_18px_60px_rgba(30,35,38,0.06)]">
+                <h2 className="mb-5 font-serif text-2xl font-semibold">
+                  {t("roomDetail", "bookingDetails")}
+                </h2>
+                <div className="grid gap-4 sm:grid-cols-2">
+                  {[
+                    {
+                      icon: Check,
+                      label: t("roomDetail", "bookingType"),
+                      value: room.bookingType[lang],
+                    },
+                    {
+                      icon: Users,
+                      label: t("roomDetail", "capacity"),
+                      value: `${room.maxGuests} ${t("roomsSection", "guests")}`,
+                    },
+                    {
+                      icon: BedDouble,
+                      label: t("roomDetail", "bedSetup"),
+                      value: room.beds[lang],
+                    },
+                    {
+                      icon: Maximize2,
+                      label: t("roomDetail", "roomSize"),
+                      value: `${room.sizeSqm} m² / ${room.sizeSqft} ft²`,
+                    },
+                    {
+                      icon: Check,
+                      label: t("roomDetail", "indexedPrice"),
+                      value: `CNY ${room.bookingPriceCnyPerNight.toLocaleString("en-US")} / night`,
+                    },
+                  ].map((item) => (
+                    <div key={item.label} className="flex items-start gap-3">
+                      <item.icon size={18} className="mt-0.5 shrink-0 text-accent" />
+                      <div>
+                        <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">
+                          {item.label}
+                        </p>
+                        <p className="mt-1 text-sm font-medium">{item.value}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+                <p className="mt-5 text-sm leading-relaxed text-muted-foreground">
+                  {t("roomDetail", "livePriceNote")}
+                </p>
+              </div>
+            </ScrollReveal>
           </div>
 
           {/* Sticky sidebar */}
           <div className="lg:col-span-1">
-            <div className="sticky top-28 bg-card border border-border/50 rounded-xl p-8">
+            <div className="sticky top-28 bg-card border border-border/50 rounded-lg p-8 shadow-[0_20px_70px_rgba(30,35,38,0.08)]">
               <p className="text-accent text-sm font-medium tracking-widest uppercase mb-2">
                 {t("roomsSection", "from")}
               </p>
@@ -99,8 +173,11 @@ export default function RoomDetailPage() {
               <p className="text-muted-foreground text-sm mb-8">
                 {t("roomDetail", "perNight")}
               </p>
+              <p className="mb-5 text-sm leading-relaxed text-muted-foreground">
+                {t("roomDetail", "livePriceNote")}
+              </p>
               <a
-                href="https://www.booking.com"
+                href={BOOKING_URL}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="block w-full bg-accent text-accent-foreground py-3.5 rounded-lg font-medium text-center text-sm transition-all hover:opacity-90 hover:shadow-md"

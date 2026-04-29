@@ -440,7 +440,7 @@ export default function RoomGallery({
               </div>
             </div>
 
-            <div className="pointer-events-none absolute inset-x-0 bottom-0 z-20 bg-gradient-to-t from-black via-black/96 to-transparent px-4 pb-4 pt-16 sm:px-8 sm:pb-5 sm:pt-20">
+            <div className="pointer-events-none absolute inset-x-0 bottom-0 z-20 bg-gradient-to-t from-black via-black/95 to-transparent px-4 pb-4 pt-16 sm:px-8 sm:pb-5 sm:pt-20">
               <div className="pointer-events-auto mx-auto max-w-[min(94vw,1800px)]">
                 {renderThumbnails("dark", "compact")}
               </div>
