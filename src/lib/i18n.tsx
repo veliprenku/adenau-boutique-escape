@@ -46,17 +46,15 @@ const translations = {
   roomsSection: {
     title: { de: "Unsere Zimmer", en: "Our Rooms" },
     subtitle: { de: "Komfort und Ruhe für jeden Gast", en: "Comfort and calm for every guest" },
-    from: { de: "Ab ca.", en: "From around" },
-    perNight: { de: "/ Nacht", en: "/ night" },
+    details: { de: "Zimmerdetails", en: "Room details" },
     viewDetails: { de: "Details ansehen", en: "View Details" },
     viewAll: { de: "Alle Zimmer ansehen", en: "View All Rooms" },
     guests: { de: "Gaeste", en: "guests" },
     livePrice: { de: "Verfuegbarkeit pruefen", en: "Check availability" },
-    bookingNote: {
-      de: "Die angezeigten Preise sind Richtwerte und koennen je nach Datum, Belegung, Steuern und gewaehlter Rate variieren. Die aktuelle Verfuegbarkeit sehen Sie im Buchungsprozess.",
-      en: "Displayed prices are indicative and can vary by date, occupancy, taxes, and selected rate. Current availability is shown during the booking process.",
+    bookingText: {
+      de: "Aktuelle Verfuegbarkeit und Buchung laufen direkt ueber Booking.com.",
+      en: "Current availability and booking are handled directly through Booking.com.",
     },
-    indexedPrice: { de: "Richtpreis", en: "Indicative price" },
   },
   amenities: {
     title: { de: "Annehmlichkeiten", en: "Amenities" },
@@ -153,7 +151,7 @@ const translations = {
       en: "Send a quick request, book directly, or plan your route to Adenau.",
     },
     eyebrow: { de: "Anfrage & Anreise", en: "Request & Arrival" },
-    cardTitle: { de: "Buttermarkt 3, mitten in Adenau", en: "Buttermarkt 3, right in Adenau" },
+    cardTitle: { de: "Hauptstraße 310, Adenau", en: "Hauptstraße 310, Adenau" },
     cardText: {
       de: "Das Haus liegt zentral am Buttermarkt und bleibt trotzdem ein ruhiger Ausgangspunkt fuer Ihren Aufenthalt nahe dem Nuerburgring.",
       en: "The house sits centrally at Buttermarkt while staying a calm base for your visit near the Nuerburgring.",
@@ -173,17 +171,17 @@ const translations = {
     features: { de: "Ausstattung", en: "Features" },
     bookNow: { de: "Jetzt buchen", en: "Book Now" },
     relatedRooms: { de: "Weitere Zimmer", en: "Other Rooms" },
-    perNight: { de: "pro Nacht", en: "per night" },
     bookingDetails: { de: "Zimmerdetails", en: "Room details" },
     bookingType: { de: "Zimmerkategorie", en: "Room type" },
     capacity: { de: "Kapazitaet", en: "Capacity" },
     bedSetup: { de: "Betten", en: "Beds" },
     roomSize: { de: "Groesse", en: "Size" },
-    livePriceNote: {
-      de: "Der angezeigte Preis ist ein Richtwert. Aktuelle Preise und Verfuegbarkeit sehen Sie im Buchungsprozess.",
-      en: "The displayed price is indicative. Current rates and availability are shown during the booking process.",
+    bookingCtaEyebrow: { de: "Buchung", en: "Booking" },
+    bookingCtaTitle: { de: "Verfuegbarkeit ansehen", en: "Check availability" },
+    bookingCtaText: {
+      de: "Alle Buchungsdetails sehen Sie direkt im Buchungsprozess.",
+      en: "All booking details are shown directly during the booking process.",
     },
-    indexedPrice: { de: "Richtpreis", en: "Indicative price" },
   },
 } as const;
 

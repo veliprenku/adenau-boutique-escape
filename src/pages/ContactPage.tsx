@@ -7,14 +7,17 @@ import Seo from "@/components/Seo";
 import ConsentMapEmbed from "@/components/ConsentMapEmbed";
 import { ArrowUpRight, CalendarCheck, Mail, MapPin, Phone, Route, Send } from "lucide-react";
 import { propertyImages } from "@/lib/media";
-import { BRAND_NAME, CONTACT } from "@/lib/site";
+import {
+  BRAND_NAME,
+  CONTACT,
+  PROPERTY_ADDRESS_LINES,
+  PROPERTY_MAP_EMBED_URL,
+  PROPERTY_MAP_URL,
+} from "@/lib/site";
 
 export default function ContactPage() {
   const { lang, t } = useI18n();
   const [formData, setFormData] = useState({ name: "", email: "", message: "" });
-  const mapEmbedUrl =
-    "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2532.8!2d6.9345!3d50.3825!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47bfb0b0b0b0b0b0%3A0x0!2sAdenau!5e0!3m2!1sde!2sde!4v1";
-  const mapDirectionsUrl = "https://www.google.com/maps/search/?api=1&query=Buttermarkt+3%2C+53518+Adenau";
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -80,7 +83,14 @@ export default function ContactPage() {
                     <MapPin size={18} />
                   </div>
                   <p className="mb-1 text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">{t("contact", "address")}</p>
-                  <p className="text-sm leading-relaxed text-foreground">Buttermarkt 3<br />53518 Adenau, Deutschland</p>
+                  <p className="text-sm leading-relaxed text-foreground">
+                    {PROPERTY_ADDRESS_LINES.map((line) => (
+                      <span key={line}>
+                        {line}
+                        <br />
+                      </span>
+                    ))}
+                  </p>
                 </div>
                 <a href={`tel:${CONTACT.phone.replace(/\s/g, "")}`} className="block rounded-lg border border-border/60 bg-card p-4 shadow-sm transition-all hover:-translate-y-0.5 hover:border-accent/35">
                   <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-full bg-accent/10 text-accent">
@@ -100,7 +110,7 @@ export default function ContactPage() {
 
               <div className="mt-6 grid gap-3 sm:grid-cols-2">
                 <a
-                  href={mapDirectionsUrl}
+                  href={PROPERTY_MAP_URL}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center justify-center gap-2 rounded-lg bg-accent px-5 py-3 text-sm font-semibold text-accent-foreground transition-all hover:-translate-y-0.5 hover:shadow-md"
@@ -177,8 +187,8 @@ export default function ContactPage() {
           <div className="mx-auto mt-8 max-w-6xl overflow-hidden rounded-lg border border-border/60 bg-card shadow-[0_24px_80px_rgba(30,35,38,0.08)]">
             <ConsentMapEmbed
               iframeTitle={lang === "de" ? `Karte zum ${BRAND_NAME}` : `Map to ${BRAND_NAME}`}
-              src={mapEmbedUrl}
-              mapsLink={mapDirectionsUrl}
+              src={PROPERTY_MAP_EMBED_URL}
+              mapsLink={PROPERTY_MAP_URL}
               heightClassName="h-[340px] md:h-[420px]"
             />
           </div>

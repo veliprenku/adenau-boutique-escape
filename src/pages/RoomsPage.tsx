@@ -49,7 +49,7 @@ export default function RoomsPage() {
         <ScrollReveal>
           <div className="mx-auto mt-12 max-w-3xl rounded-lg border border-border/60 bg-card p-6 text-center shadow-[0_18px_60px_rgba(30,35,38,0.06)]">
             <p className="text-sm leading-relaxed text-muted-foreground">
-              {t("roomsSection", "bookingNote")}
+              {t("roomsSection", "bookingText")}
             </p>
             <a
               href={BOOKING_URL}

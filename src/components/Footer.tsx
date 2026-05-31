@@ -5,7 +5,7 @@ import BrandLogo from "@/components/BrandLogo";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
 import { useCookieConsent } from "@/lib/cookie-consent";
 import { useI18n } from "@/lib/i18n";
-import { BOOKING_URL, BRAND_NAME, CONTACT } from "@/lib/site";
+import { BOOKING_URL, BRAND_NAME, CONTACT, PROPERTY_ADDRESS_LINES } from "@/lib/site";
 
 export default function Footer() {
   const { lang, t } = useI18n();
@@ -67,7 +67,14 @@ export default function Footer() {
             <div className="space-y-4 text-sm text-primary-foreground/68">
               <div className="flex items-start gap-2">
                 <MapPin size={16} className="mt-0.5 shrink-0 text-primary-foreground/85" />
-                <span>Buttermarkt 3<br />53518 Adenau<br />Deutschland</span>
+                <span>
+                  {PROPERTY_ADDRESS_LINES.map((line) => (
+                    <span key={line}>
+                      {line}
+                      <br />
+                    </span>
+                  ))}
+                </span>
               </div>
               <a href={`tel:${CONTACT.phone.replace(/\s/g, "")}`} className="flex items-center gap-2 transition-colors hover:text-primary-foreground">
                 <Phone size={16} className="shrink-0 text-primary-foreground/85" />

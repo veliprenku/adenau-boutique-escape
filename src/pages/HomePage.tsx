@@ -142,7 +142,6 @@ export default function HomePage() {
           className="absolute inset-0 w-full h-full object-cover"
           width={1920}
           height={1080}
-          fetchPriority="high"
           decoding="async"
           sizes="100vw"
         />

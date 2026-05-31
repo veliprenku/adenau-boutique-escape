@@ -8,20 +8,22 @@ import adenauLandscape from "@/assets/adenau-landscape.jpg";
 import adenauVillage from "@/assets/adenau-village.jpg";
 import nuerburgring from "@/assets/nuerburgring.jpg";
 import { propertyImages } from "@/lib/media";
-import { BRAND_NAME, DEFAULT_DESCRIPTION } from "@/lib/site";
+import {
+  BRAND_NAME,
+  DEFAULT_DESCRIPTION,
+  PROPERTY_MAP_EMBED_URL,
+  PROPERTY_MAP_URL,
+} from "@/lib/site";
 import { BriefcaseBusiness, Car, Coffee, MapPin, Monitor, ShowerHead, UsersRound, Wifi } from "lucide-react";
 
 export default function AboutPage() {
   const { lang, t } = useI18n();
-  const mapEmbedUrl =
-    "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2532.8!2d6.9345!3d50.3825!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47bfb0b0b0b0b0b0%3A0x0!2sAdenau!5e0!3m2!1sde!2sde!4v1";
-  const mapDirectionsUrl = "https://www.google.com/maps/search/?api=1&query=Buttermarkt+3%2C+53518+Adenau";
 
   const sections = [
     {
       title: t("about", "storyTitle"),
       text: t("about", "storyText"),
-      image: propertyImages.guestLounge,
+      image: propertyImages.streetExterior,
     },
     {
       title: t("about", "adenauTitle"),
@@ -68,7 +70,6 @@ export default function AboutPage() {
           src={propertyImages.exteriorHero}
           alt={lang === "de" ? `${BRAND_NAME} Aussenansicht` : `${BRAND_NAME} exterior`}
           className="absolute inset-0 w-full h-full object-cover"
-          fetchPriority="high"
           decoding="async"
           sizes="100vw"
         />
@@ -136,8 +137,8 @@ export default function AboutPage() {
             </h2>
             <ConsentMapEmbed
               iframeTitle={lang === "de" ? `Karte zum ${BRAND_NAME}` : `Map to ${BRAND_NAME}`}
-              src={mapEmbedUrl}
-              mapsLink={mapDirectionsUrl}
+              src={PROPERTY_MAP_EMBED_URL}
+              mapsLink={PROPERTY_MAP_URL}
               heightClassName="h-[400px]"
             />
           </div>

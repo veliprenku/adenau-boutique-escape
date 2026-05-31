@@ -62,12 +62,9 @@ export default function RoomCard({ room }: { room: Room }) {
             ) : null;
           })}
         </div>
-        <div className="flex items-center justify-between">
-          <span className="text-foreground font-serif text-lg font-semibold">
-            {t("roomsSection", "from")} €{room.price}
-            <span className="text-muted-foreground text-sm font-sans font-normal">
-              {" "}{t("roomsSection", "perNight")}
-            </span>
+        <div className="flex items-center justify-between border-t border-border/60 pt-4">
+          <span className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+            {t("roomsSection", "details")}
           </span>
           <span className="text-accent text-sm font-medium group-hover:underline underline-offset-4">
             {t("roomsSection", "viewDetails")} →

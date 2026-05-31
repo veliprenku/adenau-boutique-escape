@@ -14,15 +14,27 @@ export const BRAND_NAME = `${BRAND_PRIMARY} ${BRAND_SECONDARY}`;
 export const BRAND_SUBTITLE = "Adenau - Nuerburgring";
 
 export const PROPERTY_ADDRESS = {
-  streetAddress: "Buttermarkt 3",
+  streetAddress: "Hauptstraße 310",
   postalCode: "53518",
   addressLocality: "Adenau",
   addressCountry: "DE",
 };
 
+export const PROPERTY_ADDRESS_LINES = [
+  PROPERTY_ADDRESS.streetAddress,
+  `${PROPERTY_ADDRESS.postalCode} ${PROPERTY_ADDRESS.addressLocality}`,
+  "Deutschland",
+];
+
+export const PROPERTY_MAP_QUERY = `${PROPERTY_ADDRESS.streetAddress}, ${PROPERTY_ADDRESS.postalCode} ${PROPERTY_ADDRESS.addressLocality}, Germany`;
+
+export const PROPERTY_MAP_URL = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(PROPERTY_MAP_QUERY)}`;
+
+export const PROPERTY_MAP_EMBED_URL = `https://www.google.com/maps?q=${encodeURIComponent(PROPERTY_MAP_QUERY)}&output=embed`;
+
 export const CONTACT = {
   phone: "+49 2691 123456",
-  email: "info@buttermarkt-adenau.de",
+  email: "Shtufizija@gmail.com",
 };
 
 export const DEFAULT_DESCRIPTION =

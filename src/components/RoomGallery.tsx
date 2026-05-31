@@ -282,7 +282,6 @@ export default function RoomGallery({
                           index + 1
                         }`}
                         loading={index === 0 ? "eager" : "lazy"}
-                        fetchPriority={index === 0 ? "high" : "auto"}
                         decoding="async"
                         sizes="(min-width: 1024px) 66vw, 100vw"
                         className="h-[24rem] w-full object-cover transition-transform duration-700 group-hover:scale-[1.03] md:h-[30rem]"

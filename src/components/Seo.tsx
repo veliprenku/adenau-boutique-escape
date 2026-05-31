@@ -9,6 +9,7 @@ interface SeoProps {
   image?: string;
   type?: "website" | "article";
   jsonLd?: Record<string, unknown>;
+  noIndex?: boolean;
 }
 
 const upsertMeta = (
@@ -48,6 +49,7 @@ export default function Seo({
   image = `${SITE_URL}/apple-touch-icon.png`,
   type = "website",
   jsonLd = defaultLodgingJsonLd,
+  noIndex = false,
 }: SeoProps) {
   const location = useLocation();
   const pageTitle = title ? `${title} | ${BRAND_NAME}` : `${BRAND_NAME} | Guesthouse in Adenau near Nuerburgring`;
@@ -77,6 +79,12 @@ export default function Seo({
       document.head.appendChild(meta);
       return meta;
     });
+    upsertMeta('meta[name="robots"]', "content", noIndex ? "noindex, nofollow" : "index, follow", () => {
+      const meta = document.createElement("meta");
+      meta.setAttribute("name", "robots");
+      document.head.appendChild(meta);
+      return meta;
+    });
 
     const scriptId = "site-json-ld";
     const existing = document.getElementById(scriptId);
@@ -87,7 +95,7 @@ export default function Seo({
     script.type = "application/ld+json";
     script.text = JSON.stringify(jsonLd);
     document.head.appendChild(script);
-  }, [canonicalUrl, description, image, jsonLd, pageTitle, type]);
+  }, [canonicalUrl, description, image, jsonLd, noIndex, pageTitle, type]);
 
   return null;
 }

@@ -42,12 +42,7 @@ export default function RoomDetailPage() {
             name: BRAND_NAME,
             url: SITE_URL,
           },
-          offers: {
-            "@type": "Offer",
-            price: room.price,
-            priceCurrency: "EUR",
-            url: BOOKING_URL,
-          },
+          url: BOOKING_URL,
         }}
       />
       <Navbar />
@@ -58,7 +53,6 @@ export default function RoomDetailPage() {
           src={room.image}
           alt={room.name[lang]}
           className="absolute inset-0 w-full h-full object-cover"
-          fetchPriority="high"
           decoding="async"
           sizes="100vw"
         />
@@ -137,11 +131,6 @@ export default function RoomDetailPage() {
                       label: t("roomDetail", "roomSize"),
                       value: `${room.sizeSqm} m² / ${room.sizeSqft} ft²`,
                     },
-                    {
-                      icon: Check,
-                      label: t("roomDetail", "indexedPrice"),
-                      value: `CNY ${room.bookingPriceCnyPerNight.toLocaleString("en-US")} / night`,
-                    },
                   ].map((item) => (
                     <div key={item.label} className="flex items-start gap-3">
                       <item.icon size={18} className="mt-0.5 shrink-0 text-accent" />
@@ -154,9 +143,6 @@ export default function RoomDetailPage() {
                     </div>
                   ))}
                 </div>
-                <p className="mt-5 text-sm leading-relaxed text-muted-foreground">
-                  {t("roomDetail", "livePriceNote")}
-                </p>
               </div>
             </ScrollReveal>
           </div>
@@ -165,16 +151,13 @@ export default function RoomDetailPage() {
           <div className="lg:col-span-1">
             <div className="sticky top-28 bg-card border border-border/50 rounded-lg p-8 shadow-[0_20px_70px_rgba(30,35,38,0.08)]">
               <p className="text-accent text-sm font-medium tracking-widest uppercase mb-2">
-                {t("roomsSection", "from")}
+                {t("roomDetail", "bookingCtaEyebrow")}
               </p>
-              <p className="font-serif text-4xl font-semibold mb-1">
-                €{room.price}
+              <p className="mb-5 font-serif text-2xl font-semibold">
+                {t("roomDetail", "bookingCtaTitle")}
               </p>
-              <p className="text-muted-foreground text-sm mb-8">
-                {t("roomDetail", "perNight")}
-              </p>
-              <p className="mb-5 text-sm leading-relaxed text-muted-foreground">
-                {t("roomDetail", "livePriceNote")}
+              <p className="mb-6 text-sm leading-relaxed text-muted-foreground">
+                {t("roomDetail", "bookingCtaText")}
               </p>
               <a
                 href={BOOKING_URL}
